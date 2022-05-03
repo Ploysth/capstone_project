@@ -24,6 +24,11 @@ function App() {
     gate: "",
   });
 
+  
+  
+
+  
+
   return (
     <>
       <section>
@@ -32,9 +37,9 @@ function App() {
         <BreakCardList breakCards={breakCards} />
       </section>
 
-      <Form values={values} />
-      <FormBoarding values={values} />
-      <FormBreak values={values} />
+      <Form values={values} setValues={setValues} />
+      <FormBoarding values={values} setValues={setValues} />
+      <FormBreak values={values} setValues={setValues} />
     </>
   );
 }
