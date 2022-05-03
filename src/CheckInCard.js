@@ -2,16 +2,16 @@ import React from "react";
 
 export default function CheckInCard({ checkInCard }) {
   return (
-    <div className="checkInCard">
-      <ul>
+    <div className="card">
+      <ul className="task-card">
         <li>{checkInCard.title}</li>
-        <li>{checkInCard.timestart}</li>
-        <li>{checkInCard.timeend}</li>
-        <li>{checkInCard.airline}</li>
-        <li>{checkInCard.flightnumber}</li>
-        <li>{checkInCard.destination}</li>
-        <li>{checkInCard.registration}</li>
-        <li>{checkInCard.checkIn}</li>
+        <li>Uhrzeit von: {checkInCard.timestart}</li>
+        <li>Uhrzeit bis: {checkInCard.timeend}</li>
+        <li>Airline: {checkInCard.airline}</li>
+        <li>Flugnummer: {checkInCard.flightnumber}</li>
+        <li>Destination: {checkInCard.destination}</li>
+        <li>Registration: {checkInCard.registration}</li>
+        <li>Check-In: {checkInCard.checkIn}</li>
       </ul>
     </div>
   );
