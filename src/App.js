@@ -8,23 +8,33 @@ import Form from "./Form";
 import FormBoarding from "./FormBoarding";
 import FormBreak from "./FormBreak";
 
-
 function App() {
   const [cards, setCards] = useState(taskCards);
   const [boardingCards, setboardingCards] = useState(taskBoarding);
   const [breakCards, setbreakCards] = useState(taskBreak);
 
+  const [values, setValues] = useState({
+    timeStart: "",
+    timeEnd: "",
+    airline: "",
+    flightNumber: "",
+    destination: "",
+    registration: "",
+    checkin: "",
+    gate: "",
+  });
+
   return (
     <>
       <section>
-      <CheckInCardList cards={cards} />
-      <BoardingCardList boardingCards={boardingCards} />
-      <BreakCardList breakCards={breakCards} />
+        <CheckInCardList cards={cards} />
+        <BoardingCardList boardingCards={boardingCards} />
+        <BreakCardList breakCards={breakCards} />
       </section>
 
-      <Form />
-      <FormBoarding />
-      <FormBreak />
+      <Form values={values} />
+      <FormBoarding values={values} />
+      <FormBreak values={values} />
     </>
   );
 }
