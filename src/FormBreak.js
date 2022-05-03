@@ -18,6 +18,10 @@ export default function FormBreak({ values }) {
           placeholder="Uhrzeit bis"
           name="timeEnd"
         />
+
+        <button className="form-field" type="submit">
+          Speichern
+        </button>
       </form>
     </div>
   );
