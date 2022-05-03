@@ -53,6 +53,11 @@ export default function FormBoarding({ values }) {
           placeholder="Gate"
           name="gate"
         />
+
+<button className="form-field" type="submit">
+          Speichern
+        </button>
+        
       </form>
     </div>
   );
