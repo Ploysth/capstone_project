@@ -3,16 +3,16 @@ import React from 'react';
 export default function BoardingCard({ boardingCard }) {
   return (
     <>
-    <div className='boardingCard'>
-      <ul>
+    <div className="card">
+      <ul className="task-card">
         <li>{boardingCard.title}</li>
-        <li>{boardingCard.timestart}</li>
-        <li>{boardingCard.timeend}</li>
-        <li>{boardingCard.airline}</li>
-        <li>{boardingCard.flightnumber}</li>
-        <li>{boardingCard.destination}</li>
-        <li>{boardingCard.registration}</li>
-        <li>{boardingCard.gate}</li>
+        <li>Uhrzeit von: {boardingCard.timestart}</li>
+        <li>Uhrzeit bis: {boardingCard.timeend}</li>
+        <li>Airline: {boardingCard.airline}</li>
+        <li>Flugnummer: {boardingCard.flightnumber}</li>
+        <li>Destination: {boardingCard.destination}</li>
+        <li>Registration: {boardingCard.registration}</li>
+        <li>Gate: {boardingCard.gate}</li>
       </ul>
     </div>
     </>
