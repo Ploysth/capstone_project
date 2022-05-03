@@ -4,6 +4,11 @@ import CheckInCardList from "./CheckInCardList";
 import BoardingCardList from "./BoardingCardList";
 import BreakCardList from "./BreakCardList";
 
+import Form from "./Form";
+import FormBoarding from "./FormBoarding";
+import FormBreak from "./FormBreak";
+
+
 function App() {
   const [cards, setCards] = useState(taskCards);
   const [boardingCards, setboardingCards] = useState(taskBoarding);
@@ -16,6 +21,10 @@ function App() {
       <BoardingCardList boardingCards={boardingCards} />
       <BreakCardList breakCards={breakCards} />
       </section>
+
+      <Form />
+      <FormBoarding />
+      <FormBreak />
     </>
   );
 }
