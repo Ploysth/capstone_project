@@ -14,7 +14,6 @@ export default function FormBreak({ values, setValues }) {
 
   return (
     <div className="form-container">
-      <h1>Add Break</h1>
       <Form className="checkin-form">
         <Input
           handleInputChange={handleStartInputChange}

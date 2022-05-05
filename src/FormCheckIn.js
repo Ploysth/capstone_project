@@ -1,10 +1,7 @@
 import React from "react";
 import Input from "./components/Input";
-
 import Button from "./components/Button";
 import { Form } from "./components/Form";
-
-import styled from "styled-components";
 
 export default function FormCheckIn({ values, setValues }) {
   const handleStartInputChange = (event) => {
@@ -37,7 +34,6 @@ export default function FormCheckIn({ values, setValues }) {
 
   return (
     <section className="form-container">
-      <h1>Add new Check In</h1>
       <Form className="checkin-form">
         <Input
           handleInputChange={handleStartInputChange}
@@ -100,7 +96,3 @@ export default function FormCheckIn({ values, setValues }) {
     </section>
   );
 }
-
-
-
-

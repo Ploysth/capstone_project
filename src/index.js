@@ -1,27 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import App from './App';
-import FormCheckIn from './FormCheckIn';
-import FormBoarding from './FormBoarding';
-import FormBreak from './FormBreak';
-import GlobalStyle from './globalStyles';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import GlobalStyle from "./globalStyles";
+import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-
-
-  <React.StrictMode>
   <BrowserRouter>
-   <Routes>
-   <GlobalStyle />
-     <Route path="/" components={<App />}>
-     <Route path="/formCheckIn" components={<FormCheckIn />} />
-     <Route path="/formBoarding" components={<FormBoarding />} />
-     <Route path="/formBreak" components={<FormBreak />} />
-     </Route>
-      </Routes>
+    <React.StrictMode>
+      <GlobalStyle />
+      <App />
+    </React.StrictMode>
   </BrowserRouter>
-  </React.StrictMode>
 );
-

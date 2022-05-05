@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
 
 import CheckInCardList from "./CheckInCardList";
 import BoardingCardList from "./BoardingCardList";
 import BreakCardList from "./BreakCardList";
 
-import FormCheckIn from "./FormCheckIn";
-import FormBoarding from "./FormBoarding";
-import FormBreak from "./FormBreak";
+import CheckInPage from "./pages/CheckInPage";
+import BoardingPage from "./pages/BoardingPage";
+import BreakPage from "./pages/BreakPage";
+
 import { taskCards, taskBoarding, taskBreak } from "./components/FakeTasks";
 
 function App() {
@@ -27,20 +28,43 @@ function App() {
   });
 
   return (
-    <section>
-      <CheckInCardList cards={cards} />
-      <BoardingCardList boardingCards={boardingCards} />
-      <BreakCardList breakCards={breakCards} />
+    <>
+      <Routes>
+        <Route path="/" element={<Link to="/checkin">Go To Fly Tasks</Link>} />
 
+        <Route
+          path="/checkin"
+          element={<CheckInPage values={values} setValues={setValues} />}
+        />
 
-    <Link to="/formCheckIn">Add Check In</Link>
-    <Link to="/formBoarding">Add Boarding</Link>
-    <Link to="/formBreak">Add Break</Link>
+        <Route
+          path="/boarding"
+          element={<Link to="/boardingForm">Form Boarding</Link>}
+        />
+        <Route
+          path="/boardingForm"
+          element={<BoardingPage values={values} setValues={setValues} />}
+        />
 
-    <FormCheckIn values={values} setValues={setValues} />
-      <FormBoarding values={values} setValues={setValues} />
-      <FormBreak values={values} setValues={setValues} />
-    </section>
+        <Route
+          path="/break"
+          element={<Link to="/breakForm">Form Break</Link>}
+        />
+        <Route
+          path="/breakForm"
+          element={<BreakPage values={values} setValues={setValues} />}
+        />
+      </Routes>
+
+      
+    </>
+    //
+
+    //   <CheckInCardList cards={cards} />
+    //   <BoardingCardList boardingCards={boardingCards} />
+    //   <BreakCardList breakCards={breakCards} />
+
+    // </section>
   );
 }
 

@@ -34,7 +34,7 @@ export default function FormBoarding({ values, setValues }) {
 
   return (
     <div className="form-container">
-      <h1>Add new Boarding</h1>
+      
       <Form className="checkin-form">
         <Input
           handleInputChange={handleStartInputChange}
