@@ -1,6 +1,12 @@
 import React from "react";
+import Input from "./components/Input";
 
-export default function Form({ values, setValues }) {
+import Button from "./components/Button";
+import { Form } from "./components/Form";
+
+import styled from "styled-components";
+
+export default function FormCheckIn({ values, setValues }) {
   const handleStartInputChange = (event) => {
     setValues({ ...values, timeStartCheckIn: event.target.value });
   };
@@ -9,7 +15,7 @@ export default function Form({ values, setValues }) {
     setValues({ ...values, timeEndCheckIn: event.target.value });
   };
 
-  const handleArlineInputChange = (event) => {
+  const handleAirlineInputChange = (event) => {
     setValues({ ...values, airlineCheckIn: event.target.value });
   };
 
@@ -30,69 +36,71 @@ export default function Form({ values, setValues }) {
   };
 
   return (
-    <div className="form-container">
+    <section className="form-container">
       <h1>Add new Check In</h1>
-      <form className="checkin-form">
-        <input
-          onChange={handleStartInputChange}
+      <Form className="checkin-form">
+        <Input
+          handleInputChange={handleStartInputChange}
           value={values.timeStartCheckIn}
           className="form-field"
           placeholder="Uhrzeit von"
           name="timeStart"
         />
 
-        <input
-          onChange={handleEndInputChange}
+        <Input
+          handleInputChange={handleEndInputChange}
           value={values.timeEndCheckIn}
           className="form-field"
           placeholder="Uhrzeit bis"
           name="timeEndCheckIn"
         />
 
-        <input
-          onChange={handleArlineInputChange}
+        <Input
+          handleInputChange={handleAirlineInputChange}
           value={values.airlineCheckIn}
           className="form-field"
           placeholder="Airline"
           name="airline"
         />
 
-        <input
-          onChange={handleFlightNumberInputChange}
+        <Input
+          handleInputChange={handleFlightNumberInputChange}
           value={values.flightNumberCheckIn}
           className="form-field"
           placeholder="Flugnummer"
           name="flightNumber"
         />
 
-        <input
-          onChange={handleDestinationInputChange}
+        <Input
+          handleInputChange={handleDestinationInputChange}
           value={values.destinationCheckIn}
           className="form-field"
           placeholder="Destination"
           name="destination"
         />
 
-        <input
-          onChange={handleRegistrationInputChange}
+        <Input
+          handleInputChange={handleRegistrationInputChange}
           value={values.registrationCheckIn}
           className="form-field"
           placeholder="Registration"
           name="registration"
         />
 
-        <input
-          onChange={handleCheckInInputChange}
+        <Input
+          handleInputChange={handleCheckInInputChange}
           value={values.checkin}
           className="form-field"
           placeholder="Check In Counter"
           name="checkin"
         />
+      <Button>Speichern</Button>
+      </Form>
 
-        <button className="form-field" type="submit">
-          Speichern
-        </button>
-      </form>
-    </div>
+    </section>
   );
 }
+
+
+
+

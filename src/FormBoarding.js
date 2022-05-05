@@ -1,64 +1,98 @@
 import React from "react";
+import Input from "./components/Input";
+import Button from "./components/Button";
+import { Form } from "./components/Form";
 
-export default function FormBoarding({ values }) {
+export default function FormBoarding({ values, setValues }) {
+  const handleStartInputChange = (event) => {
+    setValues({ ...values, timeStartBoarding: event.target.value });
+  };
+
+  const handleEndInputChange = (event) => {
+    setValues({ ...values, timeEndBoarding: event.target.value });
+  };
+
+  const handleAirlineInputChange = (event) => {
+    setValues({ ...values, airlineBoarding: event.target.value });
+  };
+
+  const handleFlightNumberInputChange = (event) => {
+    setValues({ ...values, flightNumberBoarding: event.target.value });
+  };
+
+  const handleDestinationInputChange = (event) => {
+    setValues({ ...values, destinationBoarding: event.target.value });
+  };
+
+  const handleRegistrationInputChange = (event) => {
+    setValues({ ...values, registrationBoarding: event.target.value });
+  };
+
+  const handleCheckInInputChange = (event) => {
+    setValues({ ...values, gate: event.target.value });
+  };
+
   return (
     <div className="form-container">
       <h1>Add new Boarding</h1>
-      <form className="checkin-form">
-        <input
-          value={values.timeStart}
+      <Form className="checkin-form">
+        <Input
+          handleInputChange={handleStartInputChange}
+          value={values.timeStartBoarding}
           className="form-field"
           placeholder="Uhrzeit von"
           name="timeStart"
         />
 
-        <input
-          value={values.timeEnd}
+        <Input
+          handleInputChange={handleEndInputChange}
+          value={values.timeStartBoarding}
           className="form-field"
-          placeholder="Uhrzeit bis"
-          name="timeEnd"
+          placeholder="Uhrzeit von"
+          name="timeStart"
         />
 
-        <input
-          value={values.airline}
+        <Input
+          handleInputChange={handleAirlineInputChange}
+          value={values.airlineBoarding}
           className="form-field"
           placeholder="Airline"
           name="airline"
         />
 
-        <input
-          value={values.flightNumber}
+        <Input
+          handleInputChange={handleFlightNumberInputChange}
+          value={values.flightNumberBoarding}
           className="form-field"
           placeholder="Flugnummer"
           name="flightnumber"
         />
 
-        <input
-          value={values.destination}
+        <Input
+          handleInputChange={handleDestinationInputChange}
+          value={values.destinationBoarding}
           className="form-field"
           placeholder="Destination"
           name="destination"
         />
 
-        <input
-          value={values.registration}
+        <Input
+          handleInputChange={handleRegistrationInputChange}
+          value={values.registrationBoarding}
           className="form-field"
           placeholder="Registration"
           name="registration"
         />
 
-        <input
+        <Input
+          handleInputChange={handleCheckInInputChange}
           value={values.gate}
           className="form-field"
           placeholder="Gate"
           name="gate"
         />
-
-<button className="form-field" type="submit">
-          Speichern
-        </button>
-        
-      </form>
+          <Button>Speichern</Button>
+      </Form>
     </div>
   );
 }
