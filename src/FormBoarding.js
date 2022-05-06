@@ -34,7 +34,6 @@ export default function FormBoarding({ values, setValues }) {
 
   return (
     <div className="form-container">
-      
       <Form className="checkin-form">
         <Input
           handleInputChange={handleStartInputChange}
@@ -46,10 +45,10 @@ export default function FormBoarding({ values, setValues }) {
 
         <Input
           handleInputChange={handleEndInputChange}
-          value={values.timeStartBoarding}
+          value={values.timeEndBoarding}
           className="form-field"
           placeholder="Uhrzeit von"
-          name="timeStart"
+          name="timeEnd"
         />
 
         <Input
@@ -91,7 +90,7 @@ export default function FormBoarding({ values, setValues }) {
           placeholder="Gate"
           name="gate"
         />
-          <Button>Speichern</Button>
+        <Button>Speichern</Button>
       </Form>
     </div>
   );

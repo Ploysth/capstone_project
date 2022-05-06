@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Link, Routes, Route } from "react-router-dom";
-
-import CheckInCardList from "./CheckInCardList";
-import BoardingCardList from "./BoardingCardList";
-import BreakCardList from "./BreakCardList";
+import { Routes, Route } from "react-router-dom";
 
 import CheckInPage from "./pages/CheckInPage";
 import BoardingPage from "./pages/BoardingPage";
 import BreakPage from "./pages/BreakPage";
+import CardsPage from "./pages/CardsPage";
+
+import Navigation from "./components/Navigation";
 
 import { taskCards, taskBoarding, taskBreak } from "./components/FakeTasks";
 
@@ -29,42 +28,39 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Link to="/checkin">Go To Fly Tasks</Link>} />
+      <Navigation />
 
+      <Routes>
         <Route
           path="/checkin"
           element={<CheckInPage values={values} setValues={setValues} />}
         />
 
         <Route
-          path="/boarding"
-          element={<Link to="/boardingForm">Form Boarding</Link>}
-        />
-        <Route
           path="/boardingForm"
           element={<BoardingPage values={values} setValues={setValues} />}
         />
 
         <Route
-          path="/break"
-          element={<Link to="/breakForm">Form Break</Link>}
-        />
-        <Route
           path="/breakForm"
           element={<BreakPage values={values} setValues={setValues} />}
         />
+
+        <Route
+          path="/"
+          element={
+            <CardsPage
+              cards={cards}
+              setCards={setCards}
+              boardingCards={boardingCards}
+              setboardingCards={setboardingCards}
+              breakCards={breakCards}
+              setbreakCards={setbreakCards}
+            />
+          }
+        />
       </Routes>
-
-      
     </>
-    //
-
-    //   <CheckInCardList cards={cards} />
-    //   <BoardingCardList boardingCards={boardingCards} />
-    //   <BreakCardList breakCards={breakCards} />
-
-    // </section>
   );
 }
 

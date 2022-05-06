@@ -48,7 +48,7 @@ export default function FormCheckIn({ values, setValues }) {
           value={values.timeEndCheckIn}
           className="form-field"
           placeholder="Uhrzeit bis"
-          name="timeEndCheckIn"
+          name="timeEnd"
         />
 
         <Input
@@ -90,9 +90,8 @@ export default function FormCheckIn({ values, setValues }) {
           placeholder="Check In Counter"
           name="checkin"
         />
-      <Button>Speichern</Button>
+        <Button>Speichern</Button>
       </Form>
-
     </section>
   );
 }

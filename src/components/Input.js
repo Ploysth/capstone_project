@@ -19,9 +19,8 @@ export default function Input({
 }
 
 export const StyledInput = styled.input`
-width: 312px;
-height: 32px;
-border: 1px solid #36436f;
-font-size: 20px;
-
-`
+  width: 312px;
+  height: 32px;
+  border: 1px solid #36436f;
+  font-size: 20px;
+`;

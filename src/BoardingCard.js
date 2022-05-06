@@ -19,11 +19,13 @@ export default function BoardingCard({ boardingCard }) {
 }
 
 const CardSection = styled.section`
-background-color: #fffff;
+margin: 2em;
+margin-bottom: 2em;
 border: 1px solid black;
-width: 341px;
+color: black;
 `
 
 const TextHeader = styled.li`
 text-transform: uppercase;
+margin: 10px;
 `

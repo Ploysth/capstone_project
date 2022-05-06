@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
 export default function BreakCard({ breakCard }) {
@@ -10,15 +10,17 @@ export default function BreakCard({ breakCard }) {
         <li>Uhrzeit bis: {breakCard.timeend}</li>
       </ul>
     </CardSection>
-  )
+  );
 }
 
 const CardSection = styled.section`
-background-color: #fffff;
-border: 1px solid black;
-width: 341px;
-`
+  margin: 2em;
+  margin-bottom: 2em;
+  border: 1px solid black;
+  color: black;
+`;
 
 const TextHeader = styled.li`
-text-transform: uppercase;
-`
+  text-transform: uppercase;
+  margin: 10px;
+`;

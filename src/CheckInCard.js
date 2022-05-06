@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 export default function CheckInCard({ checkInCard }) {
   return (
     <CardSection>
@@ -20,11 +19,13 @@ export default function CheckInCard({ checkInCard }) {
 }
 
 const CardSection = styled.section`
-background-color: #fffff;
-border: 1px solid black;
-width: 341px;
-`
+  margin: 2em;
+  margin-bottom: 2em;
+  border: 1px solid black;
+  color: black;
+`;
 
 const TextHeader = styled.li`
-text-transform: uppercase;
-`
+  text-transform: uppercase;
+  margin: 10px;
+`;

@@ -28,7 +28,7 @@ export default function FormBreak({ values, setValues }) {
           value={values.timeEndBreak}
           className="form-field"
           placeholder="Uhrzeit bis"
-          name="timeEndCheckIn"
+          name="timeEnd"
         />
         <Button>Speichern</Button>
       </Form>
