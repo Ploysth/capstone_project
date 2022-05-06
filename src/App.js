@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import CheckInPage from "./pages/CheckInPage";
 import BoardingPage from "./pages/BoardingPage";
 import BreakPage from "./pages/BreakPage";
 import CardsPage from "./pages/CardsPage";
-
 import Navigation from "./components/Navigation";
-
 import { taskCards, taskBoarding, taskBreak } from "./components/FakeTasks";
 
 function App() {
