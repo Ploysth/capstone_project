@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "./components/Input";
 import Button from "./components/Button";
-import { Form } from "./components/Form";
+import styled from "styled-components";
 
 export default function FormBoarding({ values, setValues }) {
   const handleStartInputChange = (event) => {
@@ -33,65 +33,78 @@ export default function FormBoarding({ values, setValues }) {
   };
 
   return (
-    <div className="form-container">
-      <Form className="checkin-form">
-        <Input
-          handleInputChange={handleStartInputChange}
-          value={values.timeStartBoarding}
-          className="form-field"
-          placeholder="Uhrzeit von"
-          name="timeStart"
-        />
+    <Form>
+      <label>Uhrzeit von:</label>
+      <Input
+        handleInputChange={handleStartInputChange}
+        value={values.timeStartBoarding}
+        className="form-field"
+        placeholder="Uhrzeit von"
+        name="timeStart"
+      />
 
-        <Input
-          handleInputChange={handleEndInputChange}
-          value={values.timeEndBoarding}
-          className="form-field"
-          placeholder="Uhrzeit von"
-          name="timeEnd"
-        />
+      <label>Uhrzeit bis:</label>
+      <Input
+        handleInputChange={handleEndInputChange}
+        value={values.timeEndBoarding}
+        className="form-field"
+        placeholder="Uhrzeit von"
+        name="timeEnd"
+      />
 
-        <Input
-          handleInputChange={handleAirlineInputChange}
-          value={values.airlineBoarding}
-          className="form-field"
-          placeholder="Airline"
-          name="airline"
-        />
+      <label>Airline:</label>
+      <Input
+        handleInputChange={handleAirlineInputChange}
+        value={values.airlineBoarding}
+        className="form-field"
+        placeholder="Airline"
+        name="airline"
+      />
 
-        <Input
-          handleInputChange={handleFlightNumberInputChange}
-          value={values.flightNumberBoarding}
-          className="form-field"
-          placeholder="Flugnummer"
-          name="flightnumber"
-        />
+      <label>Flightnumber:</label>
+      <Input
+        handleInputChange={handleFlightNumberInputChange}
+        value={values.flightNumberBoarding}
+        className="form-field"
+        placeholder="Flugnummer"
+        name="flightnumber"
+      />
 
-        <Input
-          handleInputChange={handleDestinationInputChange}
-          value={values.destinationBoarding}
-          className="form-field"
-          placeholder="Destination"
-          name="destination"
-        />
+      <label>Destination:</label>
+      <Input
+        handleInputChange={handleDestinationInputChange}
+        value={values.destinationBoarding}
+        className="form-field"
+        placeholder="Destination"
+        name="destination"
+      />
 
-        <Input
-          handleInputChange={handleRegistrationInputChange}
-          value={values.registrationBoarding}
-          className="form-field"
-          placeholder="Registration"
-          name="registration"
-        />
+      <label>Registration:</label>
+      <Input
+        handleInputChange={handleRegistrationInputChange}
+        value={values.registrationBoarding}
+        className="form-field"
+        placeholder="Registration"
+        name="registration"
+      />
 
-        <Input
-          handleInputChange={handleCheckInInputChange}
-          value={values.gate}
-          className="form-field"
-          placeholder="Gate"
-          name="gate"
-        />
-        <Button>Speichern</Button>
-      </Form>
-    </div>
+      <label>Gate:</label>
+      <Input
+        handleInputChange={handleCheckInInputChange}
+        value={values.gate}
+        className="form-field"
+        placeholder="Gate"
+        name="gate"
+      />
+      <Button>Speichern</Button>
+    </Form>
   );
 }
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  align-items: center;
+  gap: 20px;
+`;

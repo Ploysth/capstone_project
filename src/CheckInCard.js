@@ -4,8 +4,8 @@ import styled from "styled-components";
 export default function CheckInCard({ checkInCard }) {
   return (
     <CardSection>
+      <TextHeader>{checkInCard.title}</TextHeader>
       <ul className="task-card">
-        <TextHeader>{checkInCard.title}</TextHeader>
         <li>Uhrzeit von: {checkInCard.timestart}</li>
         <li>Uhrzeit bis: {checkInCard.timeend}</li>
         <li>Airline: {checkInCard.airline}</li>
@@ -25,7 +25,7 @@ const CardSection = styled.section`
   color: black;
 `;
 
-const TextHeader = styled.li`
+const TextHeader = styled.header`
   text-transform: uppercase;
   margin: 10px;
 `;

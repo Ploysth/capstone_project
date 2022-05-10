@@ -4,8 +4,8 @@ import styled from "styled-components";
 export default function BoardingCard({ boardingCard }) {
   return (
     <CardSection>
+      <TextHeader>{boardingCard.title}</TextHeader>
       <ul>
-        <TextHeader>{boardingCard.title}</TextHeader>
         <li>Uhrzeit von: {boardingCard.timestart}</li>
         <li>Uhrzeit bis: {boardingCard.timeend}</li>
         <li>Airline: {boardingCard.airline}</li>
@@ -19,13 +19,13 @@ export default function BoardingCard({ boardingCard }) {
 }
 
 const CardSection = styled.section`
-margin: 2em;
-margin-bottom: 2em;
-border: 1px solid black;
-color: black;
-`
+  margin: 2em;
+  margin-bottom: 2em;
+  border: 1px solid black;
+  color: black;
+`;
 
-const TextHeader = styled.li`
-text-transform: uppercase;
-margin: 10px;
-`
+const TextHeader = styled.header`
+  text-transform: uppercase;
+  margin: 10px;
+`;

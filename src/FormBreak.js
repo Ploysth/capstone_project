@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "./components/Input";
 import Button from "./components/Button";
-import { Form } from "./components/Form";
+import styled from "styled-components";
 
 export default function FormBreak({ values, setValues }) {
   const handleStartInputChange = (event) => {
@@ -13,25 +13,33 @@ export default function FormBreak({ values, setValues }) {
   };
 
   return (
-    <div className="form-container">
-      <Form className="checkin-form">
-        <Input
-          handleInputChange={handleStartInputChange}
-          value={values.timeStartBreak}
-          className="form-field"
-          placeholder="Uhrzeit von"
-          name="timeStart"
-        />
+    <Form>
+      <label>Uhrzeit von:</label>
+      <Input
+        handleInputChange={handleStartInputChange}
+        value={values.timeStartBreak}
+        className="form-field"
+        placeholder="Uhrzeit von"
+        name="timeStart"
+      />
 
-        <Input
-          handleInputChange={handleEndInputChange}
-          value={values.timeEndBreak}
-          className="form-field"
-          placeholder="Uhrzeit bis"
-          name="timeEnd"
-        />
-        <Button>Speichern</Button>
-      </Form>
-    </div>
+      <label>Uhrzeit bis:</label>
+      <Input
+        handleInputChange={handleEndInputChange}
+        value={values.timeEndBreak}
+        className="form-field"
+        placeholder="Uhrzeit bis"
+        name="timeEnd"
+      />
+      <Button>Speichern</Button>
+    </Form>
   );
 }
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  align-items: center;
+  gap: 20px;
+`;
