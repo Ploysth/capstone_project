@@ -13,7 +13,7 @@ export default function Navigation() {
   );
 }
 
-const NavLink = styled.div`
+const NavLink = styled.nav`
   display: flex;
   gap: 2em;
   margin: 1em;

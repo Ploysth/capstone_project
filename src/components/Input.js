@@ -6,10 +6,12 @@ export default function Input({
   className,
   placeholder,
   name,
+  type,
 }) {
   return (
     <StyledInput
       onChange={handleInputChange}
+      type={type}
       value={value}
       className={className}
       placeholder={placeholder}

@@ -12,6 +12,14 @@ function App() {
   const [boardingCards, setboardingCards] = useState(taskBoarding);
   const [breakCards, setbreakCards] = useState(taskBreak);
 
+  const [enteredTimeStart, setEnteredTimeStart] = useState("");
+  const [enteredTimeEnd, setEnteredTimeEnd] = useState("");
+  const [enteredAirline, setEnteredAirline] = useState("");
+  const [enteredFlightNumber, setEnteredFlightNumber] = useState("");
+  const [enteredDestination, setEnteredDestination] = useState("");
+  const [enteredRegistration, setEnteredRegistration] = useState("");
+  const [enteredCheckInCounter, setEnteredCheckInCounter] = useState("");
+
   const [values, setValues] = useState({
     timeStart: "",
     timeEnd: "",
@@ -30,7 +38,26 @@ function App() {
       <Routes>
         <Route
           path="/checkin"
-          element={<CheckInPage values={values} setValues={setValues} />}
+          element={
+            <CheckInPage
+              values={values}
+              setValues={setValues}
+              enteredTimeStart={enteredTimeStart}
+              setEnteredTimeStart={setEnteredTimeStart}
+              enteredTimeEnd={enteredTimeEnd}
+              setEnteredTimeEnd={setEnteredTimeEnd}
+              enteredAirline={enteredAirline}
+              setEnteredAirline={setEnteredAirline}
+              enteredFlightNumber={enteredFlightNumber}
+              setEnteredFlightNumber={setEnteredFlightNumber}
+              enteredDestination={enteredDestination}
+              setEnteredDestination={setEnteredDestination}
+              enteredRegistration={enteredRegistration}
+              setEnteredRegistration={setEnteredRegistration}
+              enteredCheckInCounter={enteredCheckInCounter}
+              setEnteredCheckInCounter={setEnteredCheckInCounter}
+            />
+          }
         />
 
         <Route

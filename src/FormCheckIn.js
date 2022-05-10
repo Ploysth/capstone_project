@@ -3,7 +3,24 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import styled from "styled-components";
 
-export default function FormCheckIn({ values, setValues }) {
+export default function FormCheckIn({
+  values,
+  setValues,
+  enteredTimeStart,
+  setEnteredTimeStart,
+  enteredTimeEnd,
+  setEnteredTimeEnd,
+  enteredAirline,
+  setEnteredAirline,
+  enteredFlightNumber,
+  setEnteredFlightNumber,
+  enteredDestination,
+  setEnteredDestination,
+  enteredRegistration,
+  setEnteredRegistration,
+  enteredCheckInCounter,
+  setEnteredCheckInCounter,
+}) {
   const handleStartInputChange = (event) => {
     setValues({ ...values, timeStartCheckIn: event.target.value });
   };
@@ -33,71 +50,113 @@ export default function FormCheckIn({ values, setValues }) {
   };
 
   return (
-    <Form>
-      <label>Uhrzeit von:</label>
-      <Input
-        handleInputChange={handleStartInputChange}
-        value={values.timeStartCheckIn}
-        className="form-field"
-        placeholder="Uhrzeit von"
-        name="timeStart"
-      />
+    <>
+      <Form
+        onSubmit={(event) => {
+          event.preventDefault();
+          setEnteredTimeStart(values.timeStartCheckIn);
+          setEnteredTimeEnd(values.timeEndCheckIn);
+          setEnteredAirline(values.airlineCheckIn);
+          setEnteredFlightNumber(values.flightNumberCheckIn);
+          setEnteredDestination(values.destinationCheckIn);
+          setEnteredRegistration(values.registrationCheckIn);
+          setEnteredCheckInCounter(values.checkin);
+        }}
+      >
+        <label>
+          Uhrzeit von:
+          <Input
+            handleInputChange={handleStartInputChange}
+            type="text"
+            value={values.timeStartCheckIn}
+            className="form-field"
+            placeholder="Uhrzeit von"
+            name="timeStart"
+          />
+        </label>
 
-      <label>Uhrzeit bis:</label>
-      <Input
-        handleInputChange={handleEndInputChange}
-        value={values.timeEndCheckIn}
-        className="form-field"
-        placeholder="Uhrzeit bis"
-        name="timeEnd"
-      />
+        <label>
+          Uhrzeit bis:
+          <Input
+            handleInputChange={handleEndInputChange}
+            type="text"
+            value={values.timeEndCheckIn}
+            className="form-field"
+            placeholder="Uhrzeit bis"
+            name="timeEnd"
+          />
+        </label>
 
-      <label>Airline:</label>
-      <Input
-        handleInputChange={handleAirlineInputChange}
-        value={values.airlineCheckIn}
-        className="form-field"
-        placeholder="Airline"
-        name="airline"
-      />
+        <label>
+          Airline:
+          <Input
+            handleInputChange={handleAirlineInputChange}
+            type="text"
+            value={values.airlineCheckIn}
+            className="form-field"
+            placeholder="Airline"
+            name="airline"
+          />
+        </label>
 
-      <label>Flightnumber:</label>
-      <Input
-        handleInputChange={handleFlightNumberInputChange}
-        value={values.flightNumberCheckIn}
-        className="form-field"
-        placeholder="Flugnummer"
-        name="flightNumber"
-      />
+        <label>
+          Flightnumber:
+          <Input
+            handleInputChange={handleFlightNumberInputChange}
+            type="text"
+            value={values.flightNumberCheckIn}
+            className="form-field"
+            placeholder="Flugnummer"
+            name="flightNumber"
+          />
+        </label>
 
-      <label>Destination:</label>
-      <Input
-        handleInputChange={handleDestinationInputChange}
-        value={values.destinationCheckIn}
-        className="form-field"
-        placeholder="Destination"
-        name="destination"
-      />
+        <label>
+          Destination:
+          <Input
+            handleInputChange={handleDestinationInputChange}
+            type="text"
+            value={values.destinationCheckIn}
+            className="form-field"
+            placeholder="Destination"
+            name="destination"
+          />
+        </label>
 
-      <label>Registration:</label>
-      <Input
-        handleInputChange={handleRegistrationInputChange}
-        value={values.registrationCheckIn}
-        className="form-field"
-        placeholder="Registration"
-        name="registration"
-      />
+        <label>
+          Registration:
+          <Input
+            handleInputChange={handleRegistrationInputChange}
+            type="text"
+            value={values.registrationCheckIn}
+            className="form-field"
+            placeholder="Registration"
+            name="registration"
+          />
+        </label>
 
-      <label>Check In:</label>
-      <Input
-        handleInputChange={handleCheckInInputChange}
-        value={values.checkin}
-        className="form-field"
-        placeholder="Check In Counter"
-        name="checkin"
-      />
-      <Button>Speichern</Button>
-    </Form>
+        <label>
+          Check In:
+          <Input
+            handleInputChange={handleCheckInInputChange}
+            type="text"
+            value={values.checkin}
+            className="form-field"
+            placeholder="Check In Counter"
+            name="checkin"
+          />
+        </label>
+
+        <Button type="submit">Speichern</Button>
+      </Form>
+      <p>{enteredTimeStart} </p>
+      <p>{enteredTimeEnd} </p>
+      <p>{enteredAirline} </p>
+      <p>{enteredFlightNumber} </p>
+      <p>{enteredDestination} </p>
+      <p>{enteredRegistration} </p>
+      <p>{enteredCheckInCounter} </p>
+    </>
   );
 }
 

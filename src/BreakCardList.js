@@ -3,10 +3,10 @@ import BreakCard from "./BreakCard";
 
 export default function BreakCardList({ breakCards }) {
   return (
-    <div className="cardList">
+    <section className="cardList">
       {breakCards.map((breakCard) => {
         return <BreakCard breakCard={breakCard} key={breakCard.id} />;
       })}
-    </div>
+    </section>
   );
 }
