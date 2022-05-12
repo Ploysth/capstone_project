@@ -5,9 +5,7 @@ import styled from "styled-components";
 export default function Navigation() {
   return (
     <NavLink>
-      <StyledLink to="/checkin">Add new Check In</StyledLink>
-      <StyledLink to="/boardingForm">Add new Boarding</StyledLink>
-      <StyledLink to="/breakForm">Add new Break</StyledLink>
+      <StyledLink to="/CheckIn">Add CheckIn</StyledLink>
       <StyledLink to="/">Show Cards</StyledLink>
     </NavLink>
   );
