@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import CardsPage from "./pages/CardsPage";
 import Navigation from "./components/Navigation";
-import NewForm from "./pages/NewForm";
+import CheckInPage from "./pages/CheckInPage";
 import { taskCards, taskBoarding, taskBreak } from "./components/FakeTasks";
 
 function App() {
@@ -44,9 +44,9 @@ function App() {
 
       <Routes>
         <Route
-          path="/CheckIn"
+          path="/checkin"
           element={
-            <NewForm
+            <CheckInPage
               onNewForm={addCheckInHandler}
               allCheckInList={allCheckInList}
             />

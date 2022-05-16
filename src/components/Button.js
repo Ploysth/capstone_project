@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const NewButton = (props) => {
+const Button = (props) => {
   return (
     <StyledButton type="props.type" onClick={props.onClick}>
       {props.children}
@@ -23,4 +23,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export default NewButton;
+export default Button;
