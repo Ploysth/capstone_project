@@ -15,7 +15,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
   const [enteredNewAirlineCheckIn, setEnteredNewAirlineCheckIn] = useState("");
   const [enteredNewFlightNumberCheckIn, setEnteredNewFlightNumberCheckIn] =
     useState("");
-  const [enteredNewDestinatioCheckIn, setEnteredNewDestinationCheckIn] =
+  const [enteredNewDestinationCheckIn, setEnteredNewDestinationCheckIn] =
     useState("");
   const [enteredNewRegistrationCheckIn, setEnteredNewRegistrationCheckIn] =
     useState("");
@@ -44,8 +44,8 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
     const enteredNewFlightNumberCheckInIsValid = isThreeChars(
       enteredNewFlightNumberCheckIn
     );
-    const enteredNewDestinatioCheckInIsValid = !isEmpty(
-      enteredNewDestinatioCheckIn
+    const enteredNewDestinationCheckInIsValid = !isEmpty(
+      enteredNewDestinationCheckIn
     );
     const enteredNewRegistrationCheckInIsValid = !isEmpty(
       enteredNewRegistrationCheckIn
@@ -57,7 +57,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
       timeendCheckIn: enteredNewEndTimeCheckInIsValid,
       airlineCheckIn: enteredNewAirlineCheckInIsValid,
       flightNumberCheckIn: enteredNewFlightNumberCheckInIsValid,
-      destinationCheckIn: enteredNewDestinatioCheckInIsValid,
+      destinationCheckIn: enteredNewDestinationCheckInIsValid,
       registrationCheckIn: enteredNewRegistrationCheckInIsValid,
       checkinCounter: enteredNewCheckInCounterIsValid,
     });
@@ -65,7 +65,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
     const formIsValid =
       enteredNewStartTimeCheckInIsValid &&
       enteredNewEndTimeCheckInIsValid &&
-      enteredNewDestinatioCheckInIsValid &&
+      enteredNewDestinationCheckInIsValid &&
       enteredNewRegistrationCheckInIsValid &&
       enteredNewCheckInCounterIsValid;
 
@@ -78,7 +78,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
       enteredNewEndTimeCheckIn,
       enteredNewAirlineCheckIn,
       enteredNewFlightNumberCheckIn,
-      enteredNewDestinatioCheckIn,
+      enteredNewDestinationCheckIn,
       enteredNewRegistrationCheckIn,
       enteredNewCheckInCounter
     );
@@ -121,10 +121,10 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
 
   return (
     <>
-      <Formfieldset>
+      <Form>
         <h1>Add New Check In</h1>
         <form onSubmit={addNewCheckInHandler}>
-          <FormControl invalid={!formIsValidity.timestartCheckIn}>
+          <Wrapper invalid={!formIsValidity.timestartCheckIn}>
             <label htmlFor="timestart">Start Time:</label>
             <input
               id="timestart"
@@ -136,9 +136,9 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.timestartCheckIn && (
               <p>Please enter a valid start time!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.timeendCheckIn}>
+          <Wrapper invalid={!formIsValidity.timeendCheckIn}>
             <label htmlFor="timeend">End Time:</label>
             <input
               id="timeend"
@@ -150,9 +150,9 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.timeendCheckIn && (
               <p>Please enter a valid end time!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.airlineCheckIn}>
+          <Wrapper invalid={!formIsValidity.airlineCheckIn}>
             <label htmlFor="airline">Airline:</label>
             <input
               id="airline"
@@ -165,9 +165,9 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.airlineCheckIn && (
               <p>Please enter a valid airline (2 characters long)!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.flightNumberCheckIn}>
+          <Wrapper invalid={!formIsValidity.flightNumberCheckIn}>
             <label htmlFor="flightnumber">Flightnumber:</label>
             <input
               id="flightnumber"
@@ -180,24 +180,24 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.flightNumberCheckIn && (
               <p>Please enter a valid flightnumber (3 characters long)!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.destinationCheckIn}>
+          <Wrapper invalid={!formIsValidity.destinationCheckIn}>
             <label htmlFor="destination">Destination:</label>
             <input
               id="destination"
               type="text"
               name="destinationCheckIn"
               maxLength="3"
-              value={enteredNewDestinatioCheckIn}
+              value={enteredNewDestinationCheckIn}
               onChange={destinationChangeHandler}
             />
             {!formIsValidity.destinationCheckIn && (
               <p>Please enter a valid destination!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.registrationCheckIn}>
+          <Wrapper invalid={!formIsValidity.registrationCheckIn}>
             <label htmlFor="registration">Registration:</label>
             <input
               id="registration"
@@ -210,9 +210,9 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.registrationCheckIn && (
               <p>Please enter a valid registration!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
-          <FormControl invalid={!formIsValidity.checkinCounter}>
+          <Wrapper invalid={!formIsValidity.checkinCounter}>
             <label htmlFor="checkin">Check In:</label>
             <input
               id="checkin"
@@ -224,11 +224,11 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
             {!formIsValidity.checkinCounter && (
               <p>Please enter a valid registration!</p>
             )}
-          </FormControl>
+          </Wrapper>
 
           <Button type="submit">Add Check In</Button>
         </form>
-      </Formfieldset>
+      </Form>
 
       <NewAddCheckInList newCheckInList={allCheckInList} />
     </>
@@ -237,7 +237,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
 
 export default CheckInPage;
 
-const Formfieldset = styled.fieldset`
+const Form = styled.fieldset`
   margin: 2rem auto;
   padding: 1rem;
   width: 90%;
@@ -246,15 +246,15 @@ const Formfieldset = styled.fieldset`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 `;
 
-const FormControl = styled.div`
-  & label {
+const Wrapper = styled.div`
+  label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: ${(props) => (props.invalid ? "#ce0d0d" : "black")};
   }
 
-  & input {
+  input {
     font: inherit;
     display: block;
     width: 100%;
@@ -270,7 +270,7 @@ const FormControl = styled.div`
     color: red;
   }
 
-  & p {
+  p {
     color: white;
     background-color: #ce0d0d;
     font-size: 12px;

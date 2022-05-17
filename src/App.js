@@ -3,14 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import CardsPage from "./pages/CardsPage";
 import Navigation from "./components/Navigation";
 import CheckInPage from "./pages/CheckInPage";
-import { taskCards, taskBoarding, taskBreak } from "./components/FakeTasks";
 
 function App() {
-  const [cards, setCards] = useState(taskCards);
-  const [boardingCards, setboardingCards] = useState(taskBoarding);
-  const [breakCards, setbreakCards] = useState(taskBreak);
-
-  const [allCheckInList, setAllCHeckInList] = useState([]);
+  const [allCheckInList, setAllCheckInList] = useState([]);
 
   const addCheckInHandler = (
     ciTimestart,
@@ -21,7 +16,7 @@ function App() {
     ciRegistration,
     ciCheckInCounter
   ) => {
-    setAllCHeckInList((prevAllCheckInList) => {
+    setAllCheckInList((prevAllCheckInList) => {
       return [
         ...prevAllCheckInList,
         {
@@ -53,19 +48,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/"
-          element={
-            <CardsPage
-              cards={cards}
-              setCards={setCards}
-              boardingCards={boardingCards}
-              setboardingCards={setboardingCards}
-              breakCards={breakCards}
-              setbreakCards={setbreakCards}
-            />
-          }
-        />
+        <Route path="/" element={<CardsPage />} />
       </Routes>
     </>
   );

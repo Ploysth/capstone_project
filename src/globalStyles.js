@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: Open-Sans, Helvetica, Sans-Serif;
   }
 
-  li {
+  ul[role="list"] {
     list-style-type: none;
   }
 
