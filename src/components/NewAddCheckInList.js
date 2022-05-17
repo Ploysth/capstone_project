@@ -1,10 +1,10 @@
 import React from "react";
 import Card from "../styling/StylingCheckInList";
 
-const NewAddCheckInList = (props) => {
+const NewAddCheckInList = ({ newCheckInList, removeCheckInCards, id }) => {
   return (
     <>
-      {props.newCheckInList.map((addCheckInList) => (
+      {newCheckInList.map((addCheckInList) => (
         <Card>
           <h1>Check In</h1>
           <ul>
@@ -16,6 +16,7 @@ const NewAddCheckInList = (props) => {
             <li key={addCheckInList.id}>{addCheckInList.registration}</li>
             <li key={addCheckInList.id}>{addCheckInList.checkin}</li>
           </ul>
+          <button onClick={() => removeCheckInCards(id)}>Delete</button>
         </Card>
       ))}
     </>
