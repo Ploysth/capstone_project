@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Button from "../components/Button";
 import NewAddCheckInList from "../components/NewAddCheckInList";
-import styled from "styled-components";
-
+import { Form, Wrapper } from "../styling/StylingCheckInPage";
 const isEmpty = (value) => value.trim() === "";
 const isTwoChars = (value) => value.trim().length === 2;
 const isThreeChars = (value) => value.trim().length === 3;
@@ -236,44 +235,3 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
 };
 
 export default CheckInPage;
-
-const Form = styled.fieldset`
-  margin: 2rem auto;
-  padding: 1rem;
-  width: 90%;
-  max-width: 40rem;
-  background-color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-`;
-
-const Wrapper = styled.div`
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: ${(props) => (props.invalid ? "#ce0d0d" : "black")};
-  }
-
-  input {
-    font: inherit;
-    display: block;
-    width: 100%;
-    border: 1px solid ${(props) => (props.invalid ? "#ce0d0d" : "black")};
-    padding: 0.15rem;
-    margin-bottom: 0.5rem;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    text-transform: uppercase;
-  }
-
-  &.invalid label {
-    color: red;
-  }
-
-  p {
-    color: white;
-    background-color: #ce0d0d;
-    font-size: 12px;
-    padding: 0.3rem;
-  }
-`;

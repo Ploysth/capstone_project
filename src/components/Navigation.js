@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink, StyledLink } from "../styling/StylingNavigation";
 
 export default function Navigation() {
   return (
@@ -10,19 +9,3 @@ export default function Navigation() {
     </NavLink>
   );
 }
-
-const NavLink = styled.nav`
-  display: flex;
-  gap: 2em;
-  margin: 1em;
-`;
-
-const StyledLink = styled(Link)`
-  background-color: #ffad00;
-  color: #36436f;
-  font-size: 14px;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
