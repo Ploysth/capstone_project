@@ -158,7 +158,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
               id="airline"
               type="text"
               name="airlineCheckIn"
-              maxlength="2"
+              maxLength="2"
               value={enteredNewAirlineCheckIn}
               onChange={airlineChangeHandler}
             />
@@ -173,7 +173,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
               id="flightnumber"
               type="number"
               name="flightNumberCheckIn"
-              maxlength="4"
+              maxLength="4"
               value={enteredNewFlightNumberCheckIn}
               onChange={flightnumberChangeHandler}
             />
@@ -188,7 +188,7 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
               id="destination"
               type="text"
               name="destinationCheckIn"
-              maxlength="3"
+              maxLength="3"
               value={enteredNewDestinatioCheckIn}
               onChange={destinationChangeHandler}
             />
