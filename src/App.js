@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import CardsPage from "./pages/CardsPage";
 import Navigation from "./components/Navigation";
 import CheckInPage from "./pages/CheckInPage";
+import { nanoid } from "nanoid";
 
 function App() {
   const [allCheckInList, setAllCheckInList] = useState([]);
-
+  console.log(allCheckInList);
   const removeCheckInCards = (id) => {
     const newCheckInCards = allCheckInList.filter(
       (listCheckIn) => listCheckIn.id !== id
@@ -34,6 +35,7 @@ function App() {
           destination: checkInHandlerDestination,
           registration: checkInHandlerRegistration,
           checkin: checkInHandlerCheckInCounter,
+          id: nanoid(),
         },
       ];
     });
