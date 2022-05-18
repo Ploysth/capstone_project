@@ -7,7 +7,7 @@ const isEmpty = (value) => value.trim() === "";
 const isTwoChars = (value) => value.trim().length === 2;
 const isThreeChars = (value) => value.trim().length === 3;
 
-const CheckInPage = ({ onNewForm, allCheckInList }) => {
+const CheckInPage = ({ onNewForm, allCheckInList, removeCheckInCards }) => {
   const [enteredNewStartTimeCheckIn, setEnteredNewStartTimeCheckIn] =
     useState("");
   const [enteredNewEndTimeCheckIn, setEnteredNewEndTimeCheckIn] = useState("");
@@ -229,7 +229,10 @@ const CheckInPage = ({ onNewForm, allCheckInList }) => {
         </form>
       </Form>
 
-      <NewAddCheckInList newCheckInList={allCheckInList} />
+      <NewAddCheckInList
+        newCheckInList={allCheckInList}
+        removeCheckInCards={removeCheckInCards}
+      />
     </>
   );
 };
