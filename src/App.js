@@ -7,7 +7,6 @@ import { nanoid } from "nanoid";
 
 function App() {
   const [allCheckInList, setAllCheckInList] = useState([]);
-  console.log(allCheckInList);
   const removeCheckInCards = (id) => {
     const newCheckInCards = allCheckInList.filter(
       (listCheckIn) => listCheckIn.id !== id
