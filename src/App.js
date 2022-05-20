@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 import BoardingPage from "./pages/BoardingPage";
 
 function App() {
+
   return (
     <>
       <Routes>

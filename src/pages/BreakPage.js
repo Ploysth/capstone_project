@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import BreakForm from "../components/BreakForm";
 
 export default function BreakPage() {
   return (
-    <div>BreakPage</div>
-  )
+    <div>
+      <BreakForm />
+    </div>
+  );
 }
