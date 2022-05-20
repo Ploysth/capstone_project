@@ -2,19 +2,25 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const NavLink = styled.nav`
+  width: 100%;
+  position: fixed;
+  buttom: 0;
+  border-top: 1px solid black;
+  background-color: #05164d;
+`;
+
+const NavList = styled.ul`
   display: flex;
-  gap: 2em;
-  margin: 1em;
+  justify-content: space-around;
+  list-style-type: none;
 `;
 
 const StyledLink = styled(Link)`
-  background-color: #ffad00;
   color: #36436f;
   font-size: 14px;
   text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0.5rem;
+  color: white;
 `;
 
-export { NavLink, StyledLink };
+export { NavLink, NavList, StyledLink };

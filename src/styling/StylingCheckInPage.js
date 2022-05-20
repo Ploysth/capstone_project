@@ -14,14 +14,13 @@ const Wrapper = styled.div`
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: ${(props) => (props.invalid ? "#ce0d0d" : "black")};
   }
 
   input {
     font: inherit;
     display: block;
     width: 100%;
-    border: 1px solid ${(props) => (props.invalid ? "#ce0d0d" : "black")};
+    border: 1px solid black;
     padding: 0.15rem;
     margin-bottom: 0.5rem;
     -webkit-appearance: none;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "../styling/StylingCheckInPage";
 
-export default function List({
+export default function ListCheckIn({
   checkInItems,
   removeTestCheckInCard,
   editCheckInItem,

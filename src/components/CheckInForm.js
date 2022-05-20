@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Form, Wrapper } from "../styling/StylingCheckInPage";
-import Button from "../components/Button";
+import Button from "./Button";
 import Alert from "./Alert";
-import TestListCheckIn from "./TestListCheckIn";
+import ListCheckIn from "./ListCheckIn";
 import { nanoid } from "nanoid";
 
-export default function TestCheckInForm() {
+export default function CheckInForm() {
   const [inputStartTimeCheckIn, setInputStartTimeCheckIn] = useState("");
   const [inputEndTimeCheckIn, setInputEndTimeCheckIn] = useState("");
   const [inputAirline, setInputAirline] = useState("");
@@ -209,7 +209,7 @@ export default function TestCheckInForm() {
         </form>
       </Form>
 
-      <TestListCheckIn
+      <ListCheckIn
         checkInItems={testCheckInList}
         removeTestCheckInCard={removeTestCheckInCard}
         editCheckInItem={editCheckInItem}

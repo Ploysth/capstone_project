@@ -1,10 +1,10 @@
 import React from "react";
-import TestCheckInForm from "../components/TestCheckInForm";
+import CheckInForm from "../components/CheckInForm";
 
 const CheckInPage = () => {
   return (
     <>
-      <TestCheckInForm />
+      <CheckInForm />
     </>
   );
 };

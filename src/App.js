@@ -3,61 +3,20 @@ import { Routes, Route } from "react-router-dom";
 import CardsPage from "./pages/CardsPage";
 import Navigation from "./components/Navigation";
 import CheckInPage from "./pages/CheckInPage";
+import BreakPage from "./pages/BreakPage";
 import { nanoid } from "nanoid";
+import BoardingPage from "./pages/BoardingPage";
 
 function App() {
-  const [allCheckInList, setAllCheckInList] = useState([]);
-  const removeCheckInCards = (id) => {
-    const newCheckInCards = allCheckInList.filter(
-      (listCheckIn) => listCheckIn.id !== id
-    );
-    setAllCheckInList(newCheckInCards);
-  };
-
-  const addCheckInHandler = (
-    checkInHandlerTimestart,
-    checkInHandlerTimeend,
-    checkInHandlerAirline,
-    checkInHandlerFlightNumber,
-    checkInHandlerDestination,
-    checkInHandlerRegistration,
-    checkInHandlerCheckInCounter
-  ) => {
-    setAllCheckInList((prevAllCheckInList) => {
-      return [
-        ...prevAllCheckInList,
-        {
-          timestart: checkInHandlerTimestart,
-          timeend: checkInHandlerTimeend,
-          airline: checkInHandlerAirline,
-          flightnumber: checkInHandlerFlightNumber,
-          destination: checkInHandlerDestination,
-          registration: checkInHandlerRegistration,
-          checkin: checkInHandlerCheckInCounter,
-          id: nanoid(),
-        },
-      ];
-    });
-  };
-
   return (
     <>
-      <Navigation />
-
       <Routes>
-        <Route
-          path="/checkin"
-          element={
-            <CheckInPage
-              onNewForm={addCheckInHandler}
-              allCheckInList={allCheckInList}
-              removeCheckInCards={removeCheckInCards}
-            />
-          }
-        />
-
+        <Route path="/checkin" element={<CheckInPage />} />
+        <Route path="/boarding" element={<BoardingPage />} />
+        <Route path="/break" element={<BreakPage />} />
         <Route path="/" element={<CardsPage />} />
       </Routes>
+      <Navigation />
     </>
   );
 }
