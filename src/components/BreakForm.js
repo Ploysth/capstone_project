@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   WrapperTime,
@@ -9,10 +9,19 @@ import ListBreak from "./ListBreak";
 import Button from "./Button";
 import { nanoid } from "nanoid";
 
+const getLocalStorage = () => {
+  let listBreak = localStorage.getItem("listBreak");
+  if (listBreak) {
+    return JSON.parse(localStorage.getItem("listBreak"));
+  } else {
+    return [];
+  }
+};
+
 export default function BreakForm() {
   const [inputStartTimeBreak, setInputStartTimeBreak] = useState("");
   const [inputEndTimeBreak, setInputEndTimeBreak] = useState("");
-  const [testBreakList, setTestBreakList] = useState([]);
+  const [testBreakList, setTestBreakList] = useState(getLocalStorage());
   const [isEditBreak, setIsEditBreak] = useState(false);
   const [editBreakID, setEditBreakID] = useState(null);
 
@@ -61,6 +70,10 @@ export default function BreakForm() {
     setInputStartTimeBreak(specificItemBreak.startTimeBreak);
     setInputEndTimeBreak(specificItemBreak.endTimeBreak);
   };
+
+  useEffect(() => {
+    localStorage.setItem("listBreak", JSON.stringify(testBreakList));
+  }, [testBreakList]);
   return (
     <>
       <Form>
