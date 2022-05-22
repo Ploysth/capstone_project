@@ -13,13 +13,15 @@ const StyledButton = styled.button`
   font: inherit;
   border: 1px solid #ffad00;
   background-color: #ffad00;
-  color: white;
-  padding: 0.25rem 1rem;
+  color: #36436f;
+  padding: 0.65rem 3rem;
   cursor: pointer;
+  font-size: 14px;
 
   &:hover {
-    background: red;
-    border-color: red;
+    background: #05164d;
+    border-color: #05164d;
+    color: white;
   }
 `;
 

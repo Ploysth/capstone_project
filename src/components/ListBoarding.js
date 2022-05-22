@@ -1,14 +1,21 @@
-import React from "react";
-import { Form } from "../styling/StylingCheckInPage";
+import React, { useState } from "react";
+import {
+  Card,
+  ToogleCard,
+  EditButton,
+  DeleteButton,
+} from "../styling/StylingCheckInList";
+import MySVG from "./MySVG";
 
 export default function ListBoarding({
   boardingItem,
   removeTestBoardingCard,
   editBoardingItem,
 }) {
+  const [showBoarding, setShowBoarding] = useState(true);
   return (
     <>
-      {boardingItem.map((item) => {
+      {boardingItem.map((itemBoarding) => {
         const {
           id,
           startTimeBoarding,
@@ -17,37 +24,60 @@ export default function ListBoarding({
           flightNumberBoarding,
           destinationBoarding,
           registrationBoarding,
-          checkInCounterBoarding,
-        } = item;
+          gateBoarding,
+        } = itemBoarding;
         return (
-          <Form>
-            <article key={item.id}>
-              <p>
-                {startTimeBoarding} - {endTimeBoarding}
-              </p>
-              <p>{airlineBoarding}</p>
-              <p>{flightNumberBoarding}</p>
-              <p>{destinationBoarding}</p>
-              <p>{registrationBoarding}</p>
-              <p>{checkInCounterBoarding}</p>
-              <div>
-                <button
-                  type="button"
-                  className="edit-btn"
-                  onClick={() => editBoardingItem(id)}
-                >
-                  edit
-                </button>
-                <button
-                  type="button"
-                  className="delete-btn"
-                  onClick={() => removeTestBoardingCard(id)}
-                >
-                  remove
-                </button>
+          <>
+            <Card
+              key={itemBoarding.id}
+              onClick={() => setShowBoarding(!showBoarding)}
+            >
+              <div className="section-1">
+                <p>{startTimeBoarding}</p>
+                <p>{endTimeBoarding}</p>
               </div>
-            </article>
-          </Form>
+              <div className="section-2">
+                <p className="checkin">Boarding</p>
+                <p className="flightnumber">
+                  {airlineBoarding} {flightNumberBoarding}
+                </p>
+              </div>
+
+              <div className="section-3">
+                <MySVG variant="airplane" size="30px" color="#36436f" />
+                <p>{destinationBoarding}</p>
+              </div>
+
+              <div className="section-4">
+                <p>{registrationBoarding}</p>
+                <p>{gateBoarding}</p>
+              </div>
+            </Card>
+
+            {showBoarding ? (
+              <ToogleCard className="toogleButton">
+                <div className="edit">
+                  <EditButton
+                    type="button"
+                    className="edit-btn"
+                    onClick={() => editBoardingItem(id)}
+                  >
+                    Edit
+                  </EditButton>
+                </div>
+
+                <div className="delete-btn">
+                  <DeleteButton
+                    type="button"
+                    className="delete-btn"
+                    onClick={() => removeTestBoardingCard(id)}
+                  >
+                    Delete
+                  </DeleteButton>
+                </div>
+              </ToogleCard>
+            ) : null}
+          </>
         );
       })}
     </>

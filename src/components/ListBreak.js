@@ -1,39 +1,56 @@
-import React from "react";
-import { Form } from "../styling/StylingCheckInPage";
+import React, { useState } from "react";
+import {
+  BreakCard,
+  ToogleCard,
+  EditButton,
+  DeleteButton,
+} from "../styling/StylingCheckInList";
 
 export default function ListBreak({
   breakItem,
   removeTestBreakCard,
   editBreakItem,
 }) {
+  const [showBreak, setShowBreak] = useState(true);
   return (
     <>
-      {breakItem.map((item) => {
-        const { id, startTimeBreak, endTimeBreak } = item;
+      {breakItem.map((itemBreak) => {
+        const { id, startTimeBreak, endTimeBreak } = itemBreak;
         return (
-          <Form>
-            <article key={item.id}>
-              <p>
-                {startTimeBreak} - {endTimeBreak}
-              </p>
-              <div>
-                <button
+          <>
+            <BreakCard
+              key={itemBreak.id}
+              onClick={() => setShowBreak(!showBreak)}
+            >
+              <div className="break-section-time">
+                <p>{startTimeBreak}</p>
+                <p>{endTimeBreak}</p>
+              </div>
+
+              <div className="break-section-title">
+                <p className="break">Breake</p>
+              </div>
+            </BreakCard>
+
+            {showBreak ? (
+              <ToogleCard className="toogleButton">
+                <EditButton
                   type="button"
                   className="edit-btn"
                   onClick={() => editBreakItem(id)}
                 >
                   edit
-                </button>
-                <button
+                </EditButton>
+                <DeleteButton
                   type="button"
                   className="delete-btn"
                   onClick={() => removeTestBreakCard(id)}
                 >
-                  remove
-                </button>
-              </div>
-            </article>
-          </Form>
+                  Delete
+                </DeleteButton>
+              </ToogleCard>
+            ) : null}
+          </>
         );
       })}
     </>

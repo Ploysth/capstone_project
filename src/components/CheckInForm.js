@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Form, Wrapper } from "../styling/StylingCheckInPage";
+import {
+  Form,
+  Wrapper,
+  WrapperTime,
+  TimeSection,
+  ButtonSection,
+} from "../styling/StylingCheckInPage";
 import Button from "./Button";
-import Alert from "./Alert";
 import ListCheckIn from "./ListCheckIn";
 import { nanoid } from "nanoid";
 
@@ -17,7 +22,6 @@ export default function CheckInForm() {
   const [testCheckInList, setTestCheckInList] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editID, setEditID] = useState(null);
-  const [alert, setAlert] = useState({ show: true, msg: "" });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +34,6 @@ export default function CheckInForm() {
       !inputRegistration &&
       !inputCheckInCounter
     ) {
-      showAlert(true, "please enter value");
     } else if (
       inputStartTimeCheckIn &&
       inputEndTimeCheckIn &&
@@ -67,9 +70,7 @@ export default function CheckInForm() {
       setInputCheckInCounter("");
       setEditID(null);
       setIsEdit(false);
-      showAlert(true, "value changed");
     } else {
-      showAlert(true, "item added to the list");
       const newCheckInItem = {
         id: nanoid(),
         startTimeCheckIn: inputStartTimeCheckIn,
@@ -91,12 +92,7 @@ export default function CheckInForm() {
     }
   };
 
-  const showAlert = (show = false, msg = "") => {
-    setAlert({ show, msg });
-  };
-
   const removeTestCheckInCard = (id) => {
-    showAlert(true, "item removed");
     setTestCheckInList(
       testCheckInList.filter((checkInItem) => checkInItem.id !== id)
     );
@@ -121,34 +117,32 @@ export default function CheckInForm() {
     <>
       <Form>
         <form onSubmit={handleSubmit}>
-          {alert.show && (
-            <Alert
-              {...alert}
-              removeAlert={showAlert}
-              testCheckInList={testCheckInList}
-            />
-          )}
           <h3>Add New Check In</h3>
-          <Wrapper>
-            <label htmlFor="timestart">Start Time</label>
-            <input
-              type="time"
-              className="checkInStart"
-              value={inputStartTimeCheckIn}
-              required="required"
-              onChange={(event) => setInputStartTimeCheckIn(event.target.value)}
-            />
-          </Wrapper>
+          <WrapperTime>
+            <TimeSection>
+              <label htmlFor="timestart">Start Time</label>
+              <input
+                type="time"
+                className="checkInStart"
+                value={inputStartTimeCheckIn}
+                required="required"
+                onChange={(event) =>
+                  setInputStartTimeCheckIn(event.target.value)
+                }
+              />
+            </TimeSection>
 
-          <Wrapper>
-            <label htmlFor="timeend">End Time</label>
-            <input
-              type="time"
-              className="checkInEnd"
-              value={inputEndTimeCheckIn}
-              onChange={(event) => setInputEndTimeCheckIn(event.target.value)}
-            />
-          </Wrapper>
+            <TimeSection>
+              <label htmlFor="timeend">End Time</label>
+              <input
+                type="time"
+                className="checkInEnd"
+                value={inputEndTimeCheckIn}
+                required="required"
+                onChange={(event) => setInputEndTimeCheckIn(event.target.value)}
+              />
+            </TimeSection>
+          </WrapperTime>
 
           <Wrapper>
             <label htmlFor="airline">Airline</label>
@@ -157,16 +151,18 @@ export default function CheckInForm() {
               className="airline"
               maxLength="2"
               value={inputAirline}
+              required="required"
               onChange={(event) => setInputAirline(event.target.value)}
             />
           </Wrapper>
 
           <Wrapper>
-            <label htmlFor="flightnumber">FlightNumber</label>
+            <label htmlFor="flightnumber">Flightnumber</label>
             <input
               type="number"
               className="flightNumber"
               value={inputFlightNumber}
+              required="required"
               onChange={(event) => setInputFlightNumber(event.target.value)}
             />
           </Wrapper>
@@ -178,6 +174,7 @@ export default function CheckInForm() {
               className="destination"
               maxLength="3"
               value={inputDestination}
+              required="required"
               onChange={(event) => setInputDestination(event.target.value)}
             />
           </Wrapper>
@@ -189,6 +186,7 @@ export default function CheckInForm() {
               className="registration"
               maxLength="5"
               value={inputRegistration}
+              required="required"
               onChange={(event) => setInputRegistration(event.target.value)}
             />
           </Wrapper>
@@ -199,13 +197,16 @@ export default function CheckInForm() {
               type="text"
               className="checkInCounter"
               value={inputCheckInCounter}
+              required="required"
               onChange={(event) => setInputCheckInCounter(event.target.value)}
             />
           </Wrapper>
 
-          <Button type="submit" className="submit-btn">
-            {isEdit ? "edit check in" : "add check in"}
-          </Button>
+          <ButtonSection>
+            <Button type="submit" className="submit-btn">
+              {isEdit ? "Edit Check In" : "Add Check In"}
+            </Button>
+          </ButtonSection>
         </form>
       </Form>
 

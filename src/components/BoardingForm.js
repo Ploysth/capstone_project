@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Form, Wrapper } from "../styling/StylingCheckInPage";
+import {
+  Form,
+  Wrapper,
+  WrapperTime,
+  TimeSection,
+  ButtonSection,
+} from "../styling/StylingCheckInPage";
 import Button from "./Button";
-import Alert from "./Alert";
 import ListBoarding from "./ListBoarding";
 import { nanoid } from "nanoid";
 
@@ -14,13 +19,11 @@ export default function BoardingForm() {
   const [inputDestinationBoarding, setInputDestinationBoarding] = useState("");
   const [inputRegistrationBoarding, setInputRegistrationBoarding] =
     useState("");
-  const [inputCheckInCounterBoarding, setInputCheckInCounterBoarding] =
-    useState("");
+  const [inputGateBoarding, setInputGateBoarding] = useState("");
 
   const [testBoardingList, setTestBoardingList] = useState([]);
   const [isEditBoarding, setIsEditBoarding] = useState(false);
   const [editBoardingID, setEditBoardingID] = useState(null);
-  const [alertBoarding, setAlertBoarding] = useState({ show: true, msg: "" });
 
   const handleSubmitBoarding = (event) => {
     event.preventDefault();
@@ -31,9 +34,8 @@ export default function BoardingForm() {
       !inputFlightNumberBoarding &&
       !inputDestinationBoarding &&
       !inputRegistrationBoarding &&
-      !inputCheckInCounterBoarding
+      !inputGateBoarding
     ) {
-      showAlertBoarding(true, "please enter value");
     } else if (
       inputStartTimeBoarding &&
       inputEndTimeBoarding &&
@@ -41,7 +43,7 @@ export default function BoardingForm() {
       inputFlightNumberBoarding &&
       inputDestinationBoarding &&
       inputRegistrationBoarding &&
-      inputCheckInCounterBoarding &&
+      inputGateBoarding &&
       isEditBoarding
     ) {
       setTestBoardingList(
@@ -55,7 +57,7 @@ export default function BoardingForm() {
               flightNumberBoarding: inputFlightNumberBoarding,
               destinationBoarding: inputDestinationBoarding,
               registrationBoarding: inputRegistrationBoarding,
-              checkInCounterBoarding: inputCheckInCounterBoarding,
+              gateBoarding: inputGateBoarding,
             };
           }
           return boardingItem;
@@ -67,12 +69,10 @@ export default function BoardingForm() {
       setInputFlightNumberBoarding("");
       setInputDestinationBoarding("");
       setInputRegistrationBoarding("");
-      setInputCheckInCounterBoarding("");
+      setInputGateBoarding("");
       setEditBoardingID(null);
       setIsEditBoarding(false);
-      showAlertBoarding(true, "value changed");
     } else {
-      showAlertBoarding(true, "item added to the list");
       const newBoardingItem = {
         id: nanoid(),
         startTimeBoarding: inputStartTimeBoarding,
@@ -81,7 +81,7 @@ export default function BoardingForm() {
         flightNumberBoarding: inputFlightNumberBoarding,
         destinationBoarding: inputDestinationBoarding,
         registrationBoarding: inputRegistrationBoarding,
-        checkInCounterBoarding: inputCheckInCounterBoarding,
+        gateBoarding: inputGateBoarding,
       };
       setTestBoardingList([...testBoardingList, newBoardingItem]);
       setInputStartTimeBoarding("");
@@ -90,16 +90,11 @@ export default function BoardingForm() {
       setInputFlightNumberBoarding("");
       setInputDestinationBoarding("");
       setInputRegistrationBoarding("");
-      setInputCheckInCounterBoarding("");
+      setInputGateBoarding("");
     }
   };
 
-  const showAlertBoarding = (show = false, msg = "") => {
-    setAlertBoarding({ show, msg });
-  };
-
   const removeTestBoardingCard = (id) => {
-    showAlertBoarding(true, "item removed");
     setTestBoardingList(
       testBoardingList.filter((boardingItem) => boardingItem.id !== id)
     );
@@ -117,43 +112,39 @@ export default function BoardingForm() {
     setInputFlightNumberBoarding(specificItemBoarding.flightNumberBoarding);
     setInputDestinationBoarding(specificItemBoarding.destinationBoarding);
     setInputRegistrationBoarding(specificItemBoarding.registrationBoarding);
-    setInputCheckInCounterBoarding(specificItemBoarding.checkInCounterBoarding);
+    setInputGateBoarding(specificItemBoarding.gateBoarding);
   };
   return (
     <>
       <Form>
         <form onSubmit={handleSubmitBoarding}>
-          {alertBoarding.show && (
-            <Alert
-              {...alertBoarding}
-              removeBoardingAlert={showAlertBoarding}
-              testBoardingList={testBoardingList}
-            />
-          )}
           <h3>Add New Boarding</h3>
-          <Wrapper>
-            <label htmlFor="timestart">Start Time</label>
-            <input
-              type="time"
-              className="boardingStart"
-              value={inputStartTimeBoarding}
-              required="required"
-              onChange={(event) =>
-                setInputStartTimeBoarding(event.target.value)
-              }
-            />
-          </Wrapper>
-
-          <Wrapper>
-            <label htmlFor="timeend">End Time</label>
-            <input
-              type="time"
-              className="boardingEnd"
-              value={inputEndTimeBoarding}
-              onChange={(event) => setInputEndTimeBoarding(event.target.value)}
-            />
-          </Wrapper>
-
+          <WrapperTime>
+            <TimeSection>
+              <label htmlFor="timestart">Start Time</label>
+              <input
+                type="time"
+                className="boardingStart"
+                value={inputStartTimeBoarding}
+                required="required"
+                onChange={(event) =>
+                  setInputStartTimeBoarding(event.target.value)
+                }
+              />
+            </TimeSection>
+            <TimeSection>
+              <label htmlFor="timeend">End Time</label>
+              <input
+                type="time"
+                className="boardingEnd"
+                value={inputEndTimeBoarding}
+                required="required"
+                onChange={(event) =>
+                  setInputEndTimeBoarding(event.target.value)
+                }
+              />
+            </TimeSection>
+          </WrapperTime>
           <Wrapper>
             <label htmlFor="airline">Airline</label>
             <input
@@ -161,16 +152,18 @@ export default function BoardingForm() {
               className="airline"
               maxLength="2"
               value={inputAirlineBoarding}
+              required="required"
               onChange={(event) => setInputAirlineBoarding(event.target.value)}
             />
           </Wrapper>
 
           <Wrapper>
-            <label htmlFor="flightnumber">FlightNumber</label>
+            <label htmlFor="flightnumber">Flightnumber</label>
             <input
               type="number"
               className="flightNumber"
               value={inputFlightNumberBoarding}
+              required="required"
               onChange={(event) =>
                 setInputFlightNumberBoarding(event.target.value)
               }
@@ -184,6 +177,7 @@ export default function BoardingForm() {
               className="destination"
               maxLength="3"
               value={inputDestinationBoarding}
+              required="required"
               onChange={(event) =>
                 setInputDestinationBoarding(event.target.value)
               }
@@ -197,27 +191,29 @@ export default function BoardingForm() {
               className="registration"
               maxLength="5"
               value={inputRegistrationBoarding}
+              required="required"
               onChange={(event) =>
                 setInputRegistrationBoarding(event.target.value)
               }
             />
           </Wrapper>
 
-          <Wrapper htmlFor="checkinCounter">
+          <Wrapper htmlFor="gate">
             <label>Gate</label>
             <input
               type="text"
               className="gate"
-              value={inputCheckInCounterBoarding}
-              onChange={(event) =>
-                setInputCheckInCounterBoarding(event.target.value)
-              }
+              value={inputGateBoarding}
+              required="required"
+              onChange={(event) => setInputGateBoarding(event.target.value)}
             />
           </Wrapper>
 
-          <Button type="submit" className="submit-btn">
-            {isEditBoarding ? "edit boarding" : "add boarding"}
-          </Button>
+          <ButtonSection>
+            <Button type="submit" className="submit-btn">
+              {isEditBoarding ? "Edit Boarding" : "Add Boarding"}
+            </Button>
+          </ButtonSection>
         </form>
       </Form>
 

@@ -1,11 +1,18 @@
-import React from "react";
-import { Form } from "../styling/StylingCheckInPage";
+import React, { useState } from "react";
+import MySVG from "./MySVG";
+import {
+  Card,
+  ToogleCard,
+  EditButton,
+  DeleteButton,
+} from "../styling/StylingCheckInList";
 
 export default function ListCheckIn({
   checkInItems,
   removeTestCheckInCard,
   editCheckInItem,
 }) {
+  const [show, setShow] = useState(true);
   return (
     <>
       {checkInItems.map((item) => {
@@ -20,34 +27,56 @@ export default function ListCheckIn({
           checkInCounterCheckIn,
         } = item;
         return (
-          <Form>
-            <article key={item.id}>
-              <p>
-                {startTimeCheckIn} - {endTimeCheckIn}
-              </p>
-              <p>{airlineCheckIn}</p>
-              <p>{flightNumberCheckIn}</p>
-              <p>{destinationCheckIn}</p>
-              <p>{registrationCheckIn}</p>
-              <p>{checkInCounterCheckIn}</p>
-              <div>
-                <button
-                  type="button"
-                  className="edit-btn"
-                  onClick={() => editCheckInItem(id)}
-                >
-                  edit
-                </button>
-                <button
-                  type="button"
-                  className="delete-btn"
-                  onClick={() => removeTestCheckInCard(id)}
-                >
-                  remove
-                </button>
+          <>
+            <Card key={item.id} onClick={() => setShow(!show)}>
+              <div className="section-1">
+                <p>{startTimeCheckIn}</p>
+
+                <p>{endTimeCheckIn}</p>
               </div>
-            </article>
-          </Form>
+
+              <div className="section-2">
+                <p className="checkin">Check In</p>
+                <p className="flightnumber">
+                  {airlineCheckIn} {flightNumberCheckIn}
+                </p>
+              </div>
+
+              <div className="section-3">
+                <MySVG variant="airplane" size="30px" color="#36436f" />
+                <p>{destinationCheckIn}</p>
+              </div>
+
+              <div className="section-4">
+                <p>{registrationCheckIn}</p>
+                <p>{checkInCounterCheckIn}</p>
+              </div>
+            </Card>
+
+            {show ? (
+              <ToogleCard className="toogleButton">
+                <div className="edit">
+                  <EditButton
+                    type="button"
+                    className="edit-btn"
+                    onClick={() => editCheckInItem(id)}
+                  >
+                    Edit
+                  </EditButton>
+                </div>
+
+                <div className="delete-btn">
+                  <DeleteButton
+                    type="button"
+                    className="delete-btn"
+                    onClick={() => removeTestCheckInCard(id)}
+                  >
+                    Delete
+                  </DeleteButton>
+                </div>
+              </ToogleCard>
+            ) : null}
+          </>
         );
       })}
     </>

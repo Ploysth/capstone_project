@@ -1,23 +1,24 @@
 import React, { useState } from "react";
-import { Form, Wrapper } from "../styling/StylingCheckInPage";
+import {
+  Form,
+  WrapperTime,
+  TimeSection,
+  ButtonSectionBreak,
+} from "../styling/StylingCheckInPage";
 import ListBreak from "./ListBreak";
 import Button from "./Button";
-import Alert from "./Alert";
 import { nanoid } from "nanoid";
 
 export default function BreakForm() {
   const [inputStartTimeBreak, setInputStartTimeBreak] = useState("");
   const [inputEndTimeBreak, setInputEndTimeBreak] = useState("");
-
   const [testBreakList, setTestBreakList] = useState([]);
   const [isEditBreak, setIsEditBreak] = useState(false);
   const [editBreakID, setEditBreakID] = useState(null);
-  const [alertBreak, setAlertBreak] = useState({ show: true, msg: "" });
 
   const handleSubmitBreak = (event) => {
     event.preventDefault();
     if (!inputStartTimeBreak && !inputEndTimeBreak) {
-      showAlertBreak(true, "please enter value");
     } else if (inputStartTimeBreak && inputEndTimeBreak && isEditBreak) {
       setTestBreakList(
         testBreakList.map((breakItem) => {
@@ -35,9 +36,7 @@ export default function BreakForm() {
       setInputEndTimeBreak("");
       setEditBreakID(null);
       setIsEditBreak(false);
-      showAlertBreak(true, "value changed");
     } else {
-      showAlertBreak(true, "item added to the list");
       const newBreakItem = {
         id: nanoid(),
         startTimeBreak: inputStartTimeBreak,
@@ -49,12 +48,7 @@ export default function BreakForm() {
     }
   };
 
-  const showAlertBreak = (show = false, msg = "") => {
-    setAlertBreak({ show, msg });
-  };
-
   const removeTestBreakCard = (id) => {
-    showAlertBreak(true, "item removed");
     setTestBreakList(testBreakList.filter((breakItem) => breakItem.id !== id));
   };
 
@@ -71,38 +65,36 @@ export default function BreakForm() {
     <>
       <Form>
         <form onSubmit={handleSubmitBreak}>
-          {alertBreak.show && (
-            <Alert
-              {...alertBreak}
-              removeBreakAlert={showAlertBreak}
-              testBreakList={testBreakList}
-            />
-          )}
           <h3>Add New Break</h3>
-          <Wrapper>
-            <label htmlFor="timestart">Start Time</label>
-            <input
-              type="time"
-              className="checkInStart"
-              value={inputStartTimeBreak}
-              required="required"
-              onChange={(event) => setInputStartTimeBreak(event.target.value)}
-            />
-          </Wrapper>
+          <WrapperTime>
+            <TimeSection>
+              <label htmlFor="timestart">Start Time</label>
+              <input
+                type="time"
+                className="breakStart"
+                value={inputStartTimeBreak}
+                required="required"
+                onChange={(event) => setInputStartTimeBreak(event.target.value)}
+              />
+            </TimeSection>
 
-          <Wrapper>
-            <label htmlFor="timeend">End Time</label>
-            <input
-              type="time"
-              className="checkInEnd"
-              value={inputEndTimeBreak}
-              onChange={(event) => setInputEndTimeBreak(event.target.value)}
-            />
-          </Wrapper>
+            <TimeSection>
+              <label htmlFor="timeend">End Time</label>
+              <input
+                type="time"
+                className="breakEnd"
+                required="required"
+                value={inputEndTimeBreak}
+                onChange={(event) => setInputEndTimeBreak(event.target.value)}
+              />
+            </TimeSection>
+          </WrapperTime>
 
-          <Button type="submit" className="submit-btn">
-            {isEditBreak ? "edit check in" : "add check in"}
-          </Button>
+          <ButtonSectionBreak>
+            <Button type="submit" className="submit-btn">
+              {isEditBreak ? "Edit Break" : "Add Break"}
+            </Button>
+          </ButtonSectionBreak>
         </form>
       </Form>
 

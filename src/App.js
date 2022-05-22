@@ -8,15 +8,17 @@ import { nanoid } from "nanoid";
 import BoardingPage from "./pages/BoardingPage";
 
 function App() {
-
   return (
     <>
-      <Routes>
-        <Route path="/checkin" element={<CheckInPage />} />
-        <Route path="/boarding" element={<BoardingPage />} />
-        <Route path="/break" element={<BreakPage />} />
-        <Route path="/" element={<CardsPage />} />
-      </Routes>
+      <section>
+        <Routes>
+          <Route path="/checkin" element={<CheckInPage />} />
+          <Route path="/boarding" element={<BoardingPage />} />
+          <Route path="/break" element={<BreakPage />} />
+          <Route path="/" element={<CardsPage />} />
+        </Routes>
+      </section>
+
       <Navigation />
     </>
   );
