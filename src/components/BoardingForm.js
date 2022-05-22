@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Wrapper,
@@ -9,6 +9,15 @@ import {
 import Button from "./Button";
 import ListBoarding from "./ListBoarding";
 import { nanoid } from "nanoid";
+
+const getLocalStorage = () => {
+  let listBoarding = localStorage.getItem("listBoarding");
+  if (listBoarding) {
+    return JSON.parse(localStorage.getItem("listBoarding"));
+  } else {
+    return [];
+  }
+};
 
 export default function BoardingForm() {
   const [inputStartTimeBoarding, setInputStartTimeBoarding] = useState("");
@@ -21,7 +30,7 @@ export default function BoardingForm() {
     useState("");
   const [inputGateBoarding, setInputGateBoarding] = useState("");
 
-  const [testBoardingList, setTestBoardingList] = useState([]);
+  const [testBoardingList, setTestBoardingList] = useState(getLocalStorage());
   const [isEditBoarding, setIsEditBoarding] = useState(false);
   const [editBoardingID, setEditBoardingID] = useState(null);
 
@@ -114,6 +123,11 @@ export default function BoardingForm() {
     setInputRegistrationBoarding(specificItemBoarding.registrationBoarding);
     setInputGateBoarding(specificItemBoarding.gateBoarding);
   };
+
+  useEffect(() => {
+    localStorage.setItem("listBoarding", JSON.stringify(testBoardingList));
+  }, [testBoardingList]);
+
   return (
     <>
       <Form>
