@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Wrapper,
@@ -10,6 +10,15 @@ import Button from "./Button";
 import ListCheckIn from "./ListCheckIn";
 import { nanoid } from "nanoid";
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return JSON.parse(localStorage.getItem("list"));
+  } else {
+    return [];
+  }
+};
+
 export default function CheckInForm() {
   const [inputStartTimeCheckIn, setInputStartTimeCheckIn] = useState("");
   const [inputEndTimeCheckIn, setInputEndTimeCheckIn] = useState("");
@@ -19,7 +28,7 @@ export default function CheckInForm() {
   const [inputRegistration, setInputRegistration] = useState("");
   const [inputCheckInCounter, setInputCheckInCounter] = useState("");
 
-  const [testCheckInList, setTestCheckInList] = useState([]);
+  const [testCheckInList, setTestCheckInList] = useState(getLocalStorage());
   const [isEdit, setIsEdit] = useState(false);
   const [editID, setEditID] = useState(null);
 
@@ -112,6 +121,10 @@ export default function CheckInForm() {
     setInputRegistration(specificItemCheckIn.registrationCheckIn);
     setInputCheckInCounter(specificItemCheckIn.checkInCounterCheckIn);
   };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(testCheckInList));
+  }, [testCheckInList]);
 
   return (
     <>

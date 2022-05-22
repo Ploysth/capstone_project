@@ -12,7 +12,7 @@ export default function ListCheckIn({
   removeTestCheckInCard,
   editCheckInItem,
 }) {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   return (
     <>
       {checkInItems.map((item) => {
