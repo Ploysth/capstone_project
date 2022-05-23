@@ -12,7 +12,7 @@ import { nanoid } from "nanoid";
 const getLocalStorage = () => {
   let listBreak = localStorage.getItem("listBreak");
   if (listBreak) {
-    return JSON.parse(localStorage.getItem("listBreak"));
+    return JSON.parse(listBreak);
   } else {
     return [];
   }

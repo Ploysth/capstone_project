@@ -13,7 +13,7 @@ import { nanoid } from "nanoid";
 const getLocalStorage = () => {
   let listBoarding = localStorage.getItem("listBoarding");
   if (listBoarding) {
-    return JSON.parse(localStorage.getItem("listBoarding"));
+    return JSON.parse(listBoarding);
   } else {
     return [];
   }
