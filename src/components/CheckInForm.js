@@ -7,7 +7,6 @@ import {
   ButtonSection,
 } from "../styling/StylingCheckInPage";
 import Button from "./Button";
-import ListCheckIn from "./ListCheckIn";
 import { nanoid } from "nanoid";
 
 const getLocalStorage = () => {
@@ -99,27 +98,6 @@ export default function CheckInForm() {
       setInputRegistration("");
       setInputCheckInCounter("");
     }
-  };
-
-  const removeTestCheckInCard = (id) => {
-    setTestCheckInList(
-      testCheckInList.filter((checkInItem) => checkInItem.id !== id)
-    );
-  };
-
-  const editCheckInItem = (id) => {
-    const specificItemCheckIn = testCheckInList.find(
-      (checkInItem) => checkInItem.id === id
-    );
-    setIsEdit(true);
-    setEditID(id);
-    setInputStartTimeCheckIn(specificItemCheckIn.startTimeCheckIn);
-    setInputEndTimeCheckIn(specificItemCheckIn.endTimeCheckIn);
-    setInputAirline(specificItemCheckIn.airlineCheckIn);
-    setInputFlightNumber(specificItemCheckIn.flightNumberCheckIn);
-    setInputDestination(specificItemCheckIn.destinationCheckIn);
-    setInputRegistration(specificItemCheckIn.registrationCheckIn);
-    setInputCheckInCounter(specificItemCheckIn.checkInCounterCheckIn);
   };
 
   useEffect(() => {
@@ -222,12 +200,6 @@ export default function CheckInForm() {
           </ButtonSection>
         </form>
       </Form>
-
-      <ListCheckIn
-        checkInItems={testCheckInList}
-        removeTestCheckInCard={removeTestCheckInCard}
-        editCheckInItem={editCheckInItem}
-      />
     </>
   );
 }

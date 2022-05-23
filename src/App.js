@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import CardsPage from "./pages/CardsPage";
 import Navigation from "./components/Navigation";
 import CheckInPage from "./pages/CheckInPage";
 import BreakPage from "./pages/BreakPage";
-import { nanoid } from "nanoid";
 import BoardingPage from "./pages/BoardingPage";
 
 function App() {
