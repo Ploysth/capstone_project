@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   BreakCard,
   ToogleCard,
@@ -7,28 +8,32 @@ import {
 } from "../styling/StylingCheckInList";
 
 export default function ListBreak({
-  breakItem,
+  breakItems,
   removeTestBreakCard,
-  editBreakItem,
+  enableEditMode,
 }) {
-  const [showBreak, setShowBreak] = useState(true);
+  const [showBreak, setShowBreak] = useState(false);
+  let navigate = useNavigate();
+
+  function handleEditMode(id) {
+    enableEditMode(id);
+    navigate("/break");
+  }
+
   return (
     <>
-      {breakItem.map((itemBreak) => {
+      {breakItems.map((itemBreak) => {
         const { id, startTimeBreak, endTimeBreak } = itemBreak;
         return (
-          <>
-            <BreakCard
-              key={itemBreak.id}
-              onClick={() => setShowBreak(!showBreak)}
-            >
+          <div key={itemBreak.id}>
+            <BreakCard onClick={() => setShowBreak(!showBreak)}>
               <div className="break-section-time">
                 <p>{startTimeBreak}</p>
                 <p>{endTimeBreak}</p>
               </div>
 
               <div className="break-section-title">
-                <p className="break">Breake</p>
+                <p className="break">Break</p>
               </div>
             </BreakCard>
 
@@ -37,9 +42,9 @@ export default function ListBreak({
                 <EditButton
                   type="button"
                   className="edit-btn"
-                  onClick={() => editBreakItem(id)}
+                  onClick={() => handleEditMode(id)}
                 >
-                  edit
+                  Edit
                 </EditButton>
                 <DeleteButton
                   type="button"
@@ -50,7 +55,7 @@ export default function ListBreak({
                 </DeleteButton>
               </ToogleCard>
             ) : null}
-          </>
+          </div>
         );
       })}
     </>

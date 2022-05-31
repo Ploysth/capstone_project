@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MySVG from "./MySVG";
 import {
   Card,
@@ -10,9 +11,16 @@ import {
 export default function ListCheckIn({
   checkInItems,
   removeTestCheckInCard,
-  editCheckInItem,
+  enableEditMode,
 }) {
-  const [show, setShow] = useState(false);
+  const [showCheckIn, setShowCheckIn] = useState(false);
+  let navigate = useNavigate();
+
+  function handleEditMode(id) {
+    enableEditMode(id);
+    navigate("/checkin");
+  }
+
   return (
     <>
       {checkInItems.map((item) => {
@@ -26,9 +34,10 @@ export default function ListCheckIn({
           registrationCheckIn,
           checkInCounterCheckIn,
         } = item;
+
         return (
-          <>
-            <Card key={item.id} onClick={() => setShow(!show)}>
+          <div key={item.id}>
+            <Card onClick={() => setShowCheckIn(!showCheckIn)}>
               <div className="section-1">
                 <p>{startTimeCheckIn}</p>
 
@@ -53,13 +62,13 @@ export default function ListCheckIn({
               </div>
             </Card>
 
-            {show ? (
+            {showCheckIn ? (
               <ToogleCard className="toogleButton">
                 <div className="edit">
                   <EditButton
                     type="button"
                     className="edit-btn"
-                    onClick={() => editCheckInItem(id)}
+                    onClick={() => handleEditMode(id)}
                   >
                     Edit
                   </EditButton>
@@ -76,7 +85,7 @@ export default function ListCheckIn({
                 </div>
               </ToogleCard>
             ) : null}
-          </>
+          </div>
         );
       })}
     </>

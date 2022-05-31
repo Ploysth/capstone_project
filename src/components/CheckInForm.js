@@ -18,7 +18,13 @@ const getLocalStorage = () => {
   }
 };
 
-export default function CheckInForm() {
+export default function CheckInForm({
+  onFormSubmit,
+  isEdit,
+  editID,
+  checkInList,
+  updateCheckIn,
+}) {
   const [inputStartTimeCheckIn, setInputStartTimeCheckIn] = useState("");
   const [inputEndTimeCheckIn, setInputEndTimeCheckIn] = useState("");
   const [inputAirline, setInputAirline] = useState("");
@@ -27,57 +33,41 @@ export default function CheckInForm() {
   const [inputRegistration, setInputRegistration] = useState("");
   const [inputCheckInCounter, setInputCheckInCounter] = useState("");
 
-  const [testCheckInList, setTestCheckInList] = useState(getLocalStorage());
-  const [isEdit, setIsEdit] = useState(false);
-  const [editID, setEditID] = useState(null);
+  //const [testCheckInList, setTestCheckInList] = useState(getLocalStorage());
+  /*   const [isEdit, setIsEdit] = useState(false);
+  const [editID, setEditID] = useState(null); */
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (
-      !inputStartTimeCheckIn &&
-      !inputEndTimeCheckIn &&
-      !inputAirline &&
-      !inputFlightNumber &&
-      !inputDestination &&
-      !inputRegistration &&
-      !inputCheckInCounter
-    ) {
-    } else if (
-      inputStartTimeCheckIn &&
-      inputEndTimeCheckIn &&
-      inputAirline &&
-      inputFlightNumber &&
-      inputDestination &&
-      inputRegistration &&
-      inputCheckInCounter &&
-      isEdit
-    ) {
-      setTestCheckInList(
-        testCheckInList.map((checkInItem) => {
-          if (checkInItem.id === editID) {
-            return {
-              ...checkInItem,
-              startTimeCheckIn: inputStartTimeCheckIn,
-              endTime: inputEndTimeCheckIn,
-              airlineCheckIn: inputAirline,
-              flightNumberCheckIn: inputFlightNumber,
-              destinationCheckIn: inputDestination,
-              registrationCheckIn: inputRegistration,
-              checkInCounterCheckIn: inputCheckInCounter,
-            };
-          }
-          return checkInItem;
-        })
+  useEffect(() => {
+    if (isEdit) {
+      const toEdit = checkInList.find(
+        (checkInItem) => checkInItem.id === editID
       );
-      setInputStartTimeCheckIn("");
-      setInputEndTimeCheckIn("");
-      setInputAirline("");
-      setInputFlightNumber("");
-      setInputDestination("");
-      setInputRegistration("");
-      setInputCheckInCounter("");
-      setEditID(null);
-      setIsEdit(false);
+      setInputStartTimeCheckIn(toEdit.startTimeCheckIn);
+      setInputEndTimeCheckIn(toEdit.endTimeCheckIn);
+      setInputAirline(toEdit.airlineCheckIn);
+      setInputFlightNumber(toEdit.flightNumberCheckIn);
+      setInputDestination(toEdit.destinationCheckIn);
+      setInputRegistration(toEdit.registrationCheckIn);
+      setInputCheckInCounter(toEdit.checkInCounterCheckIn);
+    }
+  }, [isEdit, editID, checkInList]);
+
+  const handleSubmitCheckIn = (event) => {
+    event.preventDefault();
+    if (isEdit) {
+      const toEdit = checkInList.find(
+        (checkInItem) => checkInItem.id === editID
+      );
+      updateCheckIn({
+        ...toEdit,
+        startTimeCheckIn: inputStartTimeCheckIn,
+        endTimeCheckIn: inputEndTimeCheckIn,
+        airlineCheckIn: inputAirline,
+        flightNumberCheckIn: inputFlightNumber,
+        destinationCheckIn: inputDestination,
+        registrationCheckIn: inputRegistration,
+        checkInCounterCheckIn: inputCheckInCounter,
+      });
     } else {
       const newCheckInItem = {
         id: nanoid(),
@@ -89,7 +79,7 @@ export default function CheckInForm() {
         registrationCheckIn: inputRegistration,
         checkInCounterCheckIn: inputCheckInCounter,
       };
-      setTestCheckInList([...testCheckInList, newCheckInItem]);
+      onFormSubmit(newCheckInItem);
       setInputStartTimeCheckIn("");
       setInputEndTimeCheckIn("");
       setInputAirline("");
@@ -100,15 +90,15 @@ export default function CheckInForm() {
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(testCheckInList));
-  }, [testCheckInList]);
+  //useEffect(() => {
+  //  localStorage.setItem("list", JSON.stringify(testCheckInList));
+  //}, [testCheckInList]);
 
   return (
     <>
       <Form>
-        <form onSubmit={handleSubmit}>
-          <h3>Add New Check In</h3>
+        <form onSubmit={handleSubmitCheckIn}>
+          <h3>Add Check In</h3>
           <WrapperTime>
             <TimeSection>
               <label htmlFor="timestart">Start Time</label>
@@ -140,10 +130,11 @@ export default function CheckInForm() {
             <input
               type="text"
               className="airline"
-              maxLength="2"
               value={inputAirline}
               required="required"
-              onChange={(event) => setInputAirline(event.target.value)}
+              onInput={(event) => {
+                setInputAirline(event.target.value);
+              }}
             />
           </Wrapper>
 

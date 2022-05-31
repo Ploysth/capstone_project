@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   ToogleCard,
@@ -8,14 +9,21 @@ import {
 import MySVG from "./MySVG";
 
 export default function ListBoarding({
-  boardingItem,
+  boardingItems,
   removeTestBoardingCard,
-  editBoardingItem,
+  enableEditMode,
 }) {
-  const [showBoarding, setShowBoarding] = useState(true);
+  const [showBoarding, setShowBoarding] = useState(false);
+  let navigate = useNavigate();
+
+  function handleEditMode(id) {
+    enableEditMode(id);
+    navigate("/boarding");
+  }
+
   return (
     <>
-      {boardingItem.map((itemBoarding) => {
+      {boardingItems.map((itemBoarding) => {
         const {
           id,
           startTimeBoarding,
@@ -27,11 +35,8 @@ export default function ListBoarding({
           gateBoarding,
         } = itemBoarding;
         return (
-          <>
-            <Card
-              key={itemBoarding.id}
-              onClick={() => setShowBoarding(!showBoarding)}
-            >
+          <div key={itemBoarding.id}>
+            <Card onClick={() => setShowBoarding(!showBoarding)}>
               <div className="section-1">
                 <p>{startTimeBoarding}</p>
                 <p>{endTimeBoarding}</p>
@@ -56,28 +61,24 @@ export default function ListBoarding({
 
             {showBoarding ? (
               <ToogleCard className="toogleButton">
-                <div className="edit">
-                  <EditButton
-                    type="button"
-                    className="edit-btn"
-                    onClick={() => editBoardingItem(id)}
-                  >
-                    Edit
-                  </EditButton>
-                </div>
+                <EditButton
+                  type="button"
+                  className="edit-btn"
+                  onClick={() => handleEditMode(id)}
+                >
+                  Edit
+                </EditButton>
 
-                <div className="delete-btn">
-                  <DeleteButton
-                    type="button"
-                    className="delete-btn"
-                    onClick={() => removeTestBoardingCard(id)}
-                  >
-                    Delete
-                  </DeleteButton>
-                </div>
+                <DeleteButton
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => removeTestBoardingCard(id)}
+                >
+                  Delete
+                </DeleteButton>
               </ToogleCard>
             ) : null}
-          </>
+          </div>
         );
       })}
     </>

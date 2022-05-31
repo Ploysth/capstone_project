@@ -51,11 +51,12 @@ const BreakCard = styled.section`
   font-size: 15px;
   display: flex;
   color: #36436f;
+  font-weight: bold;
 
   .break-section-title {
-    padding-left: 50px;
+    padding-left: 36.5px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
   }
 
   &:hover {

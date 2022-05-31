@@ -7,7 +7,6 @@ import {
   ButtonSection,
 } from "../styling/StylingCheckInPage";
 import Button from "./Button";
-import ListBoarding from "./ListBoarding";
 import { nanoid } from "nanoid";
 
 const getLocalStorage = () => {
@@ -19,7 +18,13 @@ const getLocalStorage = () => {
   }
 };
 
-export default function BoardingForm() {
+export default function BoardingForm({
+  onFormSubmit,
+  isEdit,
+  editID,
+  boardingInList,
+  updateBoarding,
+}) {
   const [inputStartTimeBoarding, setInputStartTimeBoarding] = useState("");
   const [inputEndTimeBoarding, setInputEndTimeBoarding] = useState("");
   const [inputAirlineBoarding, setInputAirlineBoarding] = useState("");
@@ -30,57 +35,41 @@ export default function BoardingForm() {
     useState("");
   const [inputGateBoarding, setInputGateBoarding] = useState("");
 
-  const [testBoardingList, setTestBoardingList] = useState(getLocalStorage());
-  const [isEditBoarding, setIsEditBoarding] = useState(false);
-  const [editBoardingID, setEditBoardingID] = useState(null);
+  //const [testBoardingList, setTestBoardingList] = useState(getLocalStorage());
+  //const [isEditBoarding, setIsEditBoarding] = useState(false);
+  //const [editBoardingID, setEditBoardingID] = useState(null);
+
+  useEffect(() => {
+    if (isEdit) {
+      const toEdit = boardingInList.find(
+        (boardingItem) => boardingItem.id === editID
+      );
+      setInputStartTimeBoarding(toEdit.startTimeBoarding);
+      setInputEndTimeBoarding(toEdit.endTimeBoarding);
+      setInputAirlineBoarding(toEdit.airlineBoarding);
+      setInputFlightNumberBoarding(toEdit.flightNumberBoarding);
+      setInputDestinationBoarding(toEdit.destinationBoarding);
+      setInputRegistrationBoarding(toEdit.registrationBoarding);
+      setInputGateBoarding(toEdit.gateBoarding);
+    }
+  }, [isEdit, editID, boardingInList]);
 
   const handleSubmitBoarding = (event) => {
     event.preventDefault();
-    if (
-      !inputStartTimeBoarding &&
-      !inputEndTimeBoarding &&
-      !inputAirlineBoarding &&
-      !inputFlightNumberBoarding &&
-      !inputDestinationBoarding &&
-      !inputRegistrationBoarding &&
-      !inputGateBoarding
-    ) {
-    } else if (
-      inputStartTimeBoarding &&
-      inputEndTimeBoarding &&
-      inputAirlineBoarding &&
-      inputFlightNumberBoarding &&
-      inputDestinationBoarding &&
-      inputRegistrationBoarding &&
-      inputGateBoarding &&
-      isEditBoarding
-    ) {
-      setTestBoardingList(
-        testBoardingList.map((boardingItem) => {
-          if (boardingItem.id === editBoardingID) {
-            return {
-              ...boardingItem,
-              startTimeBoarding: inputStartTimeBoarding,
-              endTimeBoarding: inputEndTimeBoarding,
-              airlineBoarding: inputAirlineBoarding,
-              flightNumberBoarding: inputFlightNumberBoarding,
-              destinationBoarding: inputDestinationBoarding,
-              registrationBoarding: inputRegistrationBoarding,
-              gateBoarding: inputGateBoarding,
-            };
-          }
-          return boardingItem;
-        })
+    if (isEdit) {
+      const toEdit = boardingInList.find(
+        (boardingItem) => boardingItem.id === editID
       );
-      setInputStartTimeBoarding("");
-      setInputEndTimeBoarding("");
-      setInputAirlineBoarding("");
-      setInputFlightNumberBoarding("");
-      setInputDestinationBoarding("");
-      setInputRegistrationBoarding("");
-      setInputGateBoarding("");
-      setEditBoardingID(null);
-      setIsEditBoarding(false);
+      updateBoarding({
+        ...toEdit,
+        startTimeBoarding: inputStartTimeBoarding,
+        endTimeBoarding: inputEndTimeBoarding,
+        airlineBoarding: inputAirlineBoarding,
+        flightNumberBoarding: inputFlightNumberBoarding,
+        destinationBoarding: inputDestinationBoarding,
+        registrationBoarding: inputRegistrationBoarding,
+        gateBoarding: inputGateBoarding,
+      });
     } else {
       const newBoardingItem = {
         id: nanoid(),
@@ -92,7 +81,7 @@ export default function BoardingForm() {
         registrationBoarding: inputRegistrationBoarding,
         gateBoarding: inputGateBoarding,
       };
-      setTestBoardingList([...testBoardingList, newBoardingItem]);
+      onFormSubmit(newBoardingItem);
       setInputStartTimeBoarding("");
       setInputEndTimeBoarding("");
       setInputAirlineBoarding("");
@@ -103,30 +92,9 @@ export default function BoardingForm() {
     }
   };
 
-  const removeTestBoardingCard = (id) => {
-    setTestBoardingList(
-      testBoardingList.filter((boardingItem) => boardingItem.id !== id)
-    );
-  };
-
-  const editBoardingItem = (id) => {
-    const specificItemBoarding = testBoardingList.find(
-      (boardingItem) => boardingItem.id === id
-    );
-    setIsEditBoarding(true);
-    setEditBoardingID(id);
-    setInputStartTimeBoarding(specificItemBoarding.startTimeBoarding);
-    setInputEndTimeBoarding(specificItemBoarding.endTimeBoarding);
-    setInputAirlineBoarding(specificItemBoarding.airlineBoarding);
-    setInputFlightNumberBoarding(specificItemBoarding.flightNumberBoarding);
-    setInputDestinationBoarding(specificItemBoarding.destinationBoarding);
-    setInputRegistrationBoarding(specificItemBoarding.registrationBoarding);
-    setInputGateBoarding(specificItemBoarding.gateBoarding);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("listBoarding", JSON.stringify(testBoardingList));
-  }, [testBoardingList]);
+  //useEffect(() => {
+  //localStorage.setItem("listBoarding", JSON.stringify(testBoardingList));
+  //}, [testBoardingList]);
 
   return (
     <>
@@ -225,17 +193,11 @@ export default function BoardingForm() {
 
           <ButtonSection>
             <Button type="submit" className="submit-btn">
-              {isEditBoarding ? "Edit Boarding" : "Add Boarding"}
+              {isEdit ? "Edit Boarding" : "Add Boarding"}
             </Button>
           </ButtonSection>
         </form>
       </Form>
-
-      <ListBoarding
-        boardingItem={testBoardingList}
-        removeTestBoardingCard={removeTestBoardingCard}
-        editBoardingItem={editBoardingItem}
-      />
     </>
   );
 }

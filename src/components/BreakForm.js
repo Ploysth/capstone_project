@@ -5,7 +5,6 @@ import {
   TimeSection,
   ButtonSectionBreak,
 } from "../styling/StylingCheckInPage";
-import ListBreak from "./ListBreak";
 import Button from "./Button";
 import { nanoid } from "nanoid";
 
@@ -18,46 +17,49 @@ const getLocalStorage = () => {
   }
 };
 
-export default function BreakForm() {
+export default function BreakForm({
+  onFormSubmit,
+  isEdit,
+  editID,
+  breakList,
+  updateBreak,
+}) {
   const [inputStartTimeBreak, setInputStartTimeBreak] = useState("");
   const [inputEndTimeBreak, setInputEndTimeBreak] = useState("");
-  const [testBreakList, setTestBreakList] = useState(getLocalStorage());
+  /*   const [testBreakList, setTestBreakList] = useState(getLocalStorage());
   const [isEditBreak, setIsEditBreak] = useState(false);
-  const [editBreakID, setEditBreakID] = useState(null);
+  const [editBreakID, setEditBreakID] = useState(null); */
+
+  useEffect(() => {
+    if (isEdit) {
+      const toEdit = breakList.find((breakItem) => breakItem.id === editID);
+      setInputStartTimeBreak(toEdit.startTimeBreak);
+      setInputEndTimeBreak(toEdit.endTimeBreak);
+    }
+  }, [isEdit, editID, breakList]);
 
   const handleSubmitBreak = (event) => {
     event.preventDefault();
-    if (!inputStartTimeBreak && !inputEndTimeBreak) {
-    } else if (inputStartTimeBreak && inputEndTimeBreak && isEditBreak) {
-      setTestBreakList(
-        testBreakList.map((breakItem) => {
-          if (breakItem.id === editBreakID) {
-            return {
-              ...breakItem,
-              startTimeBreak: inputStartTimeBreak,
-              endTimeBreak: inputEndTimeBreak,
-            };
-          }
-          return breakItem;
-        })
-      );
-      setInputStartTimeBreak("");
-      setInputEndTimeBreak("");
-      setEditBreakID(null);
-      setIsEditBreak(false);
+    if (isEdit) {
+      const toEdit = breakList.find((breakItem) => breakItem.id === editID);
+      updateBreak({
+        ...toEdit,
+        startTimeBreak: inputStartTimeBreak,
+        endTimeBreak: inputEndTimeBreak,
+      });
     } else {
       const newBreakItem = {
         id: nanoid(),
         startTimeBreak: inputStartTimeBreak,
         endTimeBreak: inputEndTimeBreak,
       };
-      setTestBreakList([...testBreakList, newBreakItem]);
+      onFormSubmit(newBreakItem);
       setInputStartTimeBreak("");
       setInputEndTimeBreak("");
     }
   };
 
-  const removeTestBreakCard = (id) => {
+  /* const removeTestBreakCard = (id) => {
     setTestBreakList(testBreakList.filter((breakItem) => breakItem.id !== id));
   };
 
@@ -69,11 +71,11 @@ export default function BreakForm() {
     setEditBreakID(id);
     setInputStartTimeBreak(specificItemBreak.startTimeBreak);
     setInputEndTimeBreak(specificItemBreak.endTimeBreak);
-  };
+  }; */
 
-  useEffect(() => {
-    localStorage.setItem("listBreak", JSON.stringify(testBreakList));
-  }, [testBreakList]);
+  // useEffect(() => {
+  //   localStorage.setItem("listBreak", JSON.stringify(testBreakList));
+  //}, [testBreakList]);
   return (
     <>
       <Form>
@@ -105,17 +107,11 @@ export default function BreakForm() {
 
           <ButtonSectionBreak>
             <Button type="submit" className="submit-btn">
-              {isEditBreak ? "Edit Break" : "Add Break"}
+              {isEdit ? "Edit Break" : "Add Break"}
             </Button>
           </ButtonSectionBreak>
         </form>
       </Form>
-
-      <ListBreak
-        breakItem={testBreakList}
-        removeTestBreakCard={removeTestBreakCard}
-        editBreakItem={editBreakItem}
-      />
     </>
   );
 }
